@@ -1,8 +1,6 @@
 #include "system/RenderSystem.h"
 #include "Engine.h"
 
-#include <GL/glew.h>
-
 namespace GameEngine
 {
 	RenderSystem::RenderSystem()

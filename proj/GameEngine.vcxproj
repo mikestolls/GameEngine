@@ -86,7 +86,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../include;D:\Development\glew-2.0.0\include;D:\Development\glfw-3.2.1\include;D:\Development\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;D:\Development\glm</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,7 +106,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../include;D:\Development\glew-2.0.0\include;D:\Development\glfw-3.2.1\include;D:\Development\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;D:\Development\glm</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -133,6 +135,14 @@
     <ClInclude Include="..\include\platform\Platform_Windows.h" />
     <ClInclude Include="..\include\system\RenderSystem.h" />
     <ClInclude Include="..\include\system\SystemManager.h" />
+    <ClInclude Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.h" />
+    <ClInclude Include="..\submodule\imgui\examples\libs\gl3w\GL\glcorearb.h" />
+    <ClInclude Include="..\submodule\imgui\imconfig.h" />
+    <ClInclude Include="..\submodule\imgui\imgui.h" />
+    <ClInclude Include="..\submodule\imgui\imgui_internal.h" />
+    <ClInclude Include="..\submodule\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\submodule\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\submodule\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\driver\OpenGL.cpp" />
@@ -140,6 +150,11 @@
     <ClCompile Include="..\src\platform\Platform_Windows.cpp" />
     <ClCompile Include="..\src\system\RenderSystem.cpp" />
     <ClCompile Include="..\src\system\SystemManager.cpp" />
+    <ClCompile Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.c" />
+    <ClCompile Include="..\submodule\imgui\imgui.cpp" />
+    <ClCompile Include="..\submodule\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\submodule\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\submodule\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

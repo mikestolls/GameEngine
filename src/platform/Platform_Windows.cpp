@@ -3,8 +3,16 @@
 #include "Engine.h"
 
 // Include GLEW. Always include it before gl.h and glfw.h, since it's a bit magic.
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <GL/gl3w.h>
+#include "GLFW/glfw3.h"
+
+#ifdef _WIN32
+#undef APIENTRY
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>   // for glfwGetWin32Window
+#endif
+
+#include "imgui.h"
 
 namespace GameEngine
 {
@@ -48,7 +56,14 @@ namespace GameEngine
 			return -1;
 		}
 
-		glfwMakeContextCurrent(window); // Initialize GLEW
+		glfwMakeContextCurrent(window);
+		glfwSwapInterval(1); // Enable vsync
+				
+		if (gl3wInit() != 0)
+		{
+			fprintf(stderr, "Failed to initialize OpenGL loader!\n");
+			return 1;
+		}
 
 		// Set the required callback functions
 		glfwSetKeyCallback(window, KeyCallback);
@@ -57,19 +72,22 @@ namespace GameEngine
 
 		// Options
 		glfwSetInputMode(window, GLFW_CURSOR, GL_TRUE);
-
-		glewExperimental = true; // Needed in core profile
-		if (glewInit() != GLEW_OK)
-		{
-			fprintf(stderr, "Failed to initialize GLEW\n");
-			return -1;
-		}
-
+		
 		// Ensure we can capture the escape key being pressed below
 		glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 		m_Driver = std::make_shared<Driver_OpenGL>();
 		m_Driver->Initialize();
+
+		// initialize imgui
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO();
+
+		io.ImeWindowHandle = (void*)glfwGetWin32Window(window);
+
+		// Setup Dear ImGui style
+		ImGui::StyleColorsDark();
 
 		return 0;
 	}
