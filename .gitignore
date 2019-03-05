@@ -1,0 +1,8 @@
+sample/_obj/
+sample/.vs/
+proj/GameEngine.vcxproj.user
+proj/GameEngine.vcxproj.filters
+sample/_bin/
+_bin/
+_obj/
+.vs/
