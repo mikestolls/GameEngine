@@ -92,15 +92,23 @@ namespace GameEngine
 		Engine* engine = Engine::GetInstance();
 		engine->Initialize(m_Driver);
 
+		float deltaTime = 0.0f;
+		float lastFrame = 0.0f;
+
 		while (!glfwWindowShouldClose(window))
 		{
+			// Set frame time
+			float currentFrame = static_cast<float>(glfwGetTime());
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+
 			// Check and call events
 			glfwPollEvents();
 
 			m_Driver->PreUpdate();
 
 			// engine update
-			engine->Update(0.0f);
+			engine->Update(deltaTime);
 
 			m_Driver->PostUpdate();
 
