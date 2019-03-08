@@ -5,6 +5,7 @@
 namespace GameEngine
 {
 	Driver_OpenGL::Driver_OpenGL()
+		: IDriver()
 	{
 
 	}

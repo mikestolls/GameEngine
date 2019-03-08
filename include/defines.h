@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
+#include <map>
 #include <fstream>
 
 // Include GLEW. Always include it before gl.h and glfw.h, since it's a bit magic.
@@ -18,6 +19,7 @@
 #endif
 
 #include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 
 namespace GameEngine
 {

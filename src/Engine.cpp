@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include "system/SystemManager.h"
 #include "system/RenderSystem.h"
 
 namespace GameEngine
@@ -18,12 +17,16 @@ namespace GameEngine
 
 	Engine::Engine()
 	{
-		m_SystemMgr = new SystemManager();
+		m_SystemMgr = std::make_shared<SystemManager>();
+		m_ShaderMgr = std::make_shared<ShaderManager>();
+		m_MaterialMgr = std::make_shared<MaterialManager>();
 	}
 
 	Engine::~Engine()
 	{
-		delete m_SystemMgr;
+		m_SystemMgr = nullptr;
+		m_ShaderMgr = nullptr;
+		m_MaterialMgr = nullptr;
 	}
 
 	int Engine::Initialize(DriverPtr driver)

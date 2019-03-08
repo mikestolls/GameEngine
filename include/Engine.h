@@ -1,11 +1,12 @@
 #pragma once
 #include "platform/Platform_Windows.h"
 #include "driver/Driver_OpenGL.h"
+#include "manager/SystemManager.h"
+#include "manager/MaterialManager.h"
+#include "manager/ShaderManager.h"
 
 namespace GameEngine
 {
-	class SystemManager;
-
 	class Engine
 	{
 	public:
@@ -27,6 +28,8 @@ namespace GameEngine
 		static Engine*				s_Instance;
 
 		DriverPtr					m_Driver;
-		SystemManager*				m_SystemMgr;
+		SystemManagerPtr			m_SystemMgr;
+		ShaderManagerPtr			m_ShaderMgr;
+		MaterialManagerPtr			m_MaterialMgr;
 	};
 }

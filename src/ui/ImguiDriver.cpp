@@ -1,4 +1,5 @@
 #include "ui/ImguiDriver.h"
+#include "rendering/Shader_OpenGL.h"
 
 #include "imgui.h"
 
@@ -27,6 +28,8 @@ namespace GameEngine
 
 			// Setup Dear ImGui style
 			ImGui::StyleColorsDark();
+
+			ShaderPtr shader = std::make_shared<Shader_OpenGL>("imgui_vertex.glsl", "imgui_fragment.glsl", "");
 
 			return 0;
 		}

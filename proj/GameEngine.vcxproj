@@ -132,9 +132,12 @@
     <ClInclude Include="..\include\defines.h" />
     <ClInclude Include="..\include\driver\Driver_OpenGL.h" />
     <ClInclude Include="..\include\Engine.h" />
+    <ClInclude Include="..\include\manager\MaterialManager.h" />
+    <ClInclude Include="..\include\manager\ShaderManager.h" />
+    <ClInclude Include="..\include\manager\SystemManager.h" />
     <ClInclude Include="..\include\platform\Platform_Windows.h" />
+    <ClInclude Include="..\include\rendering\Shader_OpenGL.h" />
     <ClInclude Include="..\include\system\RenderSystem.h" />
-    <ClInclude Include="..\include\system\SystemManager.h" />
     <ClInclude Include="..\include\ui\ImguiDriver.h" />
     <ClInclude Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.h" />
     <ClInclude Include="..\submodule\imgui\examples\libs\gl3w\GL\glcorearb.h" />
@@ -148,15 +151,22 @@
   <ItemGroup>
     <ClCompile Include="..\src\driver\Driver_OpenGL.cpp" />
     <ClCompile Include="..\src\Engine.cpp" />
+    <ClCompile Include="..\src\manager\MaterialManager.cpp" />
+    <ClCompile Include="..\src\manager\ShaderManager.cpp" />
+    <ClCompile Include="..\src\manager\SystemManager.cpp" />
     <ClCompile Include="..\src\platform\Platform_Windows.cpp" />
+    <ClCompile Include="..\src\rendering\Shader_OpenGL.cpp" />
     <ClCompile Include="..\src\system\RenderSystem.cpp" />
-    <ClCompile Include="..\src\system\SystemManager.cpp" />
     <ClCompile Include="..\src\ui\ImguiDriver.cpp" />
     <ClCompile Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.c" />
     <ClCompile Include="..\submodule\imgui\imgui.cpp" />
     <ClCompile Include="..\submodule\imgui\imgui_demo.cpp" />
     <ClCompile Include="..\submodule\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\submodule\imgui\imgui_widgets.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\data\shader\imgui_fragment.glsl" />
+    <None Include="..\data\shader\imgui_vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
