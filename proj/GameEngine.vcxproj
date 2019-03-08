@@ -87,7 +87,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;D:\Development\glm</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,7 +107,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;D:\Development\glm</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -130,11 +130,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\include\defines.h" />
-    <ClInclude Include="..\include\driver\OpenGL.h" />
+    <ClInclude Include="..\include\driver\Driver_OpenGL.h" />
     <ClInclude Include="..\include\Engine.h" />
     <ClInclude Include="..\include\platform\Platform_Windows.h" />
     <ClInclude Include="..\include\system\RenderSystem.h" />
     <ClInclude Include="..\include\system\SystemManager.h" />
+    <ClInclude Include="..\include\ui\ImguiDriver.h" />
     <ClInclude Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.h" />
     <ClInclude Include="..\submodule\imgui\examples\libs\gl3w\GL\glcorearb.h" />
     <ClInclude Include="..\submodule\imgui\imconfig.h" />
@@ -145,11 +146,12 @@
     <ClInclude Include="..\submodule\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\driver\OpenGL.cpp" />
+    <ClCompile Include="..\src\driver\Driver_OpenGL.cpp" />
     <ClCompile Include="..\src\Engine.cpp" />
     <ClCompile Include="..\src\platform\Platform_Windows.cpp" />
     <ClCompile Include="..\src\system\RenderSystem.cpp" />
     <ClCompile Include="..\src\system\SystemManager.cpp" />
+    <ClCompile Include="..\src\ui\ImguiDriver.cpp" />
     <ClCompile Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.c" />
     <ClCompile Include="..\submodule\imgui\imgui.cpp" />
     <ClCompile Include="..\submodule\imgui\imgui_demo.cpp" />

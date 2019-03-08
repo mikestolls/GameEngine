@@ -1,6 +1,7 @@
 #pragma once
 #include "defines.h"
-#include "driver/OpenGL.h"
+#include "driver/Driver_OpenGL.h"
+#include "ui/ImguiDriver.h"
 
 namespace GameEngine
 {
@@ -42,5 +43,6 @@ namespace GameEngine
 		std::string						m_WindowName;
 
 		DriverPtr						m_Driver;
+		UI::ImguiDriverPtr				m_ImguiDriver;
 	};
 }

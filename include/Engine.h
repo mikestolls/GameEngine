@@ -1,6 +1,6 @@
 #pragma once
 #include "platform/Platform_Windows.h"
-#include "driver/OpenGL.h"
+#include "driver/Driver_OpenGL.h"
 
 namespace GameEngine
 {

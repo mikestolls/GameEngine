@@ -2,18 +2,6 @@
 #include "platform/Platform_Windows.h"
 #include "Engine.h"
 
-// Include GLEW. Always include it before gl.h and glfw.h, since it's a bit magic.
-#include <GL/gl3w.h>
-#include "GLFW/glfw3.h"
-
-#ifdef _WIN32
-#undef APIENTRY
-#define GLFW_EXPOSE_NATIVE_WIN32
-#include <GLFW/glfw3native.h>   // for glfwGetWin32Window
-#endif
-
-#include "imgui.h"
-
 namespace GameEngine
 {
 	GLFWwindow* window; // (In the accompanying source code, this variable is global)
@@ -79,15 +67,8 @@ namespace GameEngine
 		m_Driver = std::make_shared<Driver_OpenGL>();
 		m_Driver->Initialize();
 
-		// initialize imgui
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO();
-
-		io.ImeWindowHandle = (void*)glfwGetWin32Window(window);
-
-		// Setup Dear ImGui style
-		ImGui::StyleColorsDark();
+		m_ImguiDriver = std::make_shared<GameEngine::UI::ImguiDriver>();
+		m_ImguiDriver->Initialize((void*)glfwGetWin32Window(window), m_Driver);
 
 		return 0;
 	}
@@ -113,6 +94,7 @@ namespace GameEngine
 		float deltaTime = 0.0f;
 		float lastFrame = 0.0f;
 
+		bool show_demo_window = true;
 		while (!glfwWindowShouldClose(window))
 		{
 			// Set frame time
@@ -120,7 +102,6 @@ namespace GameEngine
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 
-			// Check and call events
 			glfwPollEvents();
 
 			m_Driver->PreUpdate();

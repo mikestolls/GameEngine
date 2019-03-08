@@ -7,6 +7,16 @@
 #include <vector>
 #include <fstream>
 
+// Include GLEW. Always include it before gl.h and glfw.h, since it's a bit magic.
+#include <GL/gl3w.h>
+#include "GLFW/glfw3.h"
+
+#ifdef _WIN32
+#undef APIENTRY
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>   // for glfwGetWin32Window
+#endif
+
 #include <glm/glm.hpp>
 
 namespace GameEngine
