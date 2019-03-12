@@ -19,6 +19,8 @@ namespace GameEngine
 		int							Update(float dt);
 
 		inline DriverPtr			GetDriver() { return m_Driver; }
+		inline ShaderManagerPtr		GetShaderMgr() { return m_ShaderMgr; }
+		inline MaterialManagerPtr	GetMaterialMgr() { return m_MaterialMgr; }
 
 	private:
 

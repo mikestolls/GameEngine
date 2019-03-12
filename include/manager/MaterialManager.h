@@ -1,6 +1,8 @@
 #pragma once
 #include "defines.h"
 
+#include "rendering/Material.h"
+
 namespace GameEngine
 {
 	class MaterialManager
@@ -12,6 +14,8 @@ namespace GameEngine
 
 		int										Initialize();
 		int										Destroy();
+
+		MaterialPtr								CreateMaterial(const char* materialFilename);
 
 	private:
 

@@ -48,9 +48,10 @@ namespace GameEngine
 		virtual bool							SetUniformMat3(const char* name, glm::mat3 value) = 0;
 		virtual bool							SetUniformMat4(const char* name, glm::mat4 value) = 0;
 
-	protected:
-
 		virtual bool							GetUniformLocation(const char* uniform, unsigned int& location) = 0;
+		virtual void							Recompile(const char* defines = NULL) = 0;
+
+	protected:
 
 		std::string								m_ShaderDefinesStr;
 		std::string								m_VertexFilename;
@@ -83,11 +84,11 @@ namespace GameEngine
 
 		// get uniform location from shader
 		bool									GetUniformLocation(const char* uniform, unsigned int& location);
+		void									Recompile(const char* defines = NULL);
 
 	private:
 
 		bool									MapUniformId(const char* uniform);
-		void									Recompile(const char* defines = NULL);
 		std::string								FilterShaderSource(std::string str, std::string removeStr);
 
 		unsigned int							m_ProgramId;

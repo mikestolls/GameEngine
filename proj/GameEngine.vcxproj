@@ -86,7 +86,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;D:\Development\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;D:\Development\glm</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -106,7 +106,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;D:\Development\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;D:\Development\glm</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -136,6 +136,7 @@
     <ClInclude Include="..\include\manager\ShaderManager.h" />
     <ClInclude Include="..\include\manager\SystemManager.h" />
     <ClInclude Include="..\include\platform\Platform_Windows.h" />
+    <ClInclude Include="..\include\rendering\Material.h" />
     <ClInclude Include="..\include\rendering\Shader_OpenGL.h" />
     <ClInclude Include="..\include\system\RenderSystem.h" />
     <ClInclude Include="..\include\ui\ImguiDriver.h" />
@@ -147,6 +148,42 @@
     <ClInclude Include="..\submodule\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\submodule\imgui\imstb_textedit.h" />
     <ClInclude Include="..\submodule\imgui\imstb_truetype.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\allocators.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\cursorstreamwrapper.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\document.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\encodedstream.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\encodings.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\error\en.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\error\error.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\filereadstream.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\filewritestream.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\fwd.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\biginteger.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\diyfp.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\dtoa.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\ieee754.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\itoa.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\meta.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\pow10.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\regex.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\stack.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\strfunc.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\strtod.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\internal\swap.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\istreamwrapper.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\memorybuffer.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\memorystream.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\msinttypes\inttypes.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\msinttypes\stdint.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\ostreamwrapper.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\pointer.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\prettywriter.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\rapidjson.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\reader.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\schema.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\stream.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\stringbuffer.h" />
+    <ClInclude Include="..\submodule\rapidjson\include\rapidjson\writer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\driver\Driver_OpenGL.cpp" />
@@ -155,6 +192,7 @@
     <ClCompile Include="..\src\manager\ShaderManager.cpp" />
     <ClCompile Include="..\src\manager\SystemManager.cpp" />
     <ClCompile Include="..\src\platform\Platform_Windows.cpp" />
+    <ClCompile Include="..\src\rendering\Material.cpp" />
     <ClCompile Include="..\src\rendering\Shader_OpenGL.cpp" />
     <ClCompile Include="..\src\system\RenderSystem.cpp" />
     <ClCompile Include="..\src\ui\ImguiDriver.cpp" />

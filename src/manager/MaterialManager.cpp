@@ -21,4 +21,9 @@ namespace GameEngine
 	{
 		return 0;
 	}
+
+	MaterialPtr MaterialManager::CreateMaterial(const char* materialFilename)
+	{
+		return MaterialPtr(new Material(materialFilename));
+	}
 }

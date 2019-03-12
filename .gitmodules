@@ -7,3 +7,6 @@
 [submodule "submodule/gl3w"]
 	path = submodule/gl3w
 	url = https://github.com/skaslev/gl3w.git
+[submodule "submodule/rapidjson"]
+	path = submodule/rapidjson
+	url = https://github.com/Tencent/rapidjson.git
