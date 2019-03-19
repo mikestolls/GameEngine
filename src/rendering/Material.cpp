@@ -35,7 +35,7 @@ namespace GameEngine
 
 		pass.shader->SetActive();
 
-		// set the uniforms saved to the mesh
+		// set the uniforms that have been pre saved
 		for (auto itr = pass.shaderUniforms.begin(); itr != pass.shaderUniforms.end(); itr++)
 		{
 			switch (itr->type)

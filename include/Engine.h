@@ -4,6 +4,7 @@
 #include "manager/SystemManager.h"
 #include "manager/MaterialManager.h"
 #include "manager/ShaderManager.h"
+#include "manager/TextureManager.h"
 
 namespace GameEngine
 {
@@ -21,6 +22,7 @@ namespace GameEngine
 		inline DriverPtr			GetDriver() { return m_Driver; }
 		inline ShaderManagerPtr		GetShaderMgr() { return m_ShaderMgr; }
 		inline MaterialManagerPtr	GetMaterialMgr() { return m_MaterialMgr; }
+		inline TextureManagerPtr	GetTextureMgr() { return m_TextureMgr; }
 
 	private:
 
@@ -33,5 +35,6 @@ namespace GameEngine
 		SystemManagerPtr			m_SystemMgr;
 		ShaderManagerPtr			m_ShaderMgr;
 		MaterialManagerPtr			m_MaterialMgr;
+		TextureManagerPtr			m_TextureMgr;
 	};
 }

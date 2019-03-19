@@ -20,6 +20,7 @@ namespace GameEngine
 		m_SystemMgr = std::make_shared<SystemManager>();
 		m_ShaderMgr = std::make_shared<ShaderManager>();
 		m_MaterialMgr = std::make_shared<MaterialManager>();
+		m_TextureMgr = std::make_shared<TextureManager>();
 	}
 
 	Engine::~Engine()

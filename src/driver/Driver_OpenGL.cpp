@@ -17,16 +17,6 @@ namespace GameEngine
 
 	int Driver_OpenGL::Initialize()
 	{
-		glEnable(GL_MULTISAMPLE);
-
-		// Enable depth test
-		glEnable(GL_DEPTH_TEST);
-		// Accept fragment if it closer to the camera than the former one
-		glDepthFunc(GL_LESS);
-
-		// Cull triangles which normal is not towards the camera
-		glEnable(GL_CULL_FACE);
-
 		return 0;
 	}
 
@@ -42,7 +32,6 @@ namespace GameEngine
 
 	int Driver_OpenGL::PostUpdate()
 	{
-		// flip screen
 		glViewport(m_ViewportRect.a.x, m_ViewportRect.a.y, m_ViewportRect.b.x, m_ViewportRect.b.y);
 
 		return 0;

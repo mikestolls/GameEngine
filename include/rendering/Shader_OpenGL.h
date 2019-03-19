@@ -51,6 +51,8 @@ namespace GameEngine
 		virtual bool							GetUniformLocation(const char* uniform, unsigned int& location) = 0;
 		virtual void							Recompile(const char* defines = NULL) = 0;
 
+		inline unsigned int						GetProgramId() { return m_ProgramId; }
+
 	protected:
 
 		std::string								m_ShaderDefinesStr;
@@ -58,6 +60,8 @@ namespace GameEngine
 		std::string								m_FragmentFilename;
 
 		std::map<std::string, unsigned int>		m_UniformIds;
+		
+		unsigned int							m_ProgramId;
 	};
 
 	typedef std::shared_ptr<IShader>			ShaderPtr;
@@ -90,7 +94,5 @@ namespace GameEngine
 
 		bool									MapUniformId(const char* uniform);
 		std::string								FilterShaderSource(std::string str, std::string removeStr);
-
-		unsigned int							m_ProgramId;
 	};
 }
