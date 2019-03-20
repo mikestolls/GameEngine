@@ -101,16 +101,18 @@ namespace GameEngine
 			return 0;
 		}
 
-		int ImguiDriver::Update(float dt)
+		int ImguiDriver::PreUpdate(float dt)
 		{
 			ImGuiIO& io = ImGui::GetIO();
 
 			io.DeltaTime = dt;
+			
+			ImGui::NewFrame();
 
 			return 0;
 		}
 
-		int ImguiDriver::Render()
+		int ImguiDriver::PostUpdate()
 		{
 			ImGui::Render();
 
