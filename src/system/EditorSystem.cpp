@@ -30,6 +30,7 @@ namespace GameEngine
 			{
 				ImGui::MenuItem("New Scene");
 				ImGui::MenuItem("Open Scene");
+				ImGui::Separator();
 				if (ImGui::MenuItem("Exit"))
 				{
 					ret = -1;
@@ -37,6 +38,8 @@ namespace GameEngine
 
 				ImGui::EndMenu();
 			}
+
+			ImGui::Separator();
 
 			if (ImGui::BeginMenu("Game Object"))
 			{
