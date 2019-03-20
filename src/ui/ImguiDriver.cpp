@@ -30,7 +30,7 @@ namespace GameEngine
 			io.DisplayFramebufferScale = ImVec2(screenWidth > 0 ? ((float)screenWidth / screenWidth) : 0, screenHeight > 0 ? ((float)screenHeight / screenHeight) : 0);
 
 			// Setup Dear ImGui style
-			ImGui::StyleColorsDark();
+			ImGui::StyleColorsClassic();
 
 			m_Material = Engine::GetInstance()->GetMaterialMgr()->CreateMaterial("imgui/imgui_material.mat");
 
@@ -44,7 +44,7 @@ namespace GameEngine
 
 			glGenBuffers(1, &m_IndexBuffer);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-			
+
 			glEnableVertexAttribArray(0); // position vec2
 			glEnableVertexAttribArray(1); // uv vec2
 			glEnableVertexAttribArray(2); // color vec4
@@ -151,7 +151,7 @@ namespace GameEngine
 			glBindVertexArray(m_VertexArrayId);
 
 			// clipping
-			ImVec2 clipOff = drawData->DisplayPos; 
+			ImVec2 clipOff = drawData->DisplayPos;
 			ImVec2 clipScale = drawData->FramebufferScale;
 
 			// Render command lists
@@ -212,8 +212,21 @@ namespace GameEngine
 			glUseProgram(0);
 			glBindTexture(GL_TEXTURE_2D, 0);
 			glBindVertexArray(0);
+			glDisable(GL_SCISSOR_TEST);
+			glDisable(GL_BLEND);
 
 			return 0;
+		}
+
+		void ImguiDriver::UpdateMouseState(bool leftDown, bool middleDown, bool rightDown, int posX, int posY)
+		{
+			ImGuiIO& io = ImGui::GetIO();
+
+			io.MouseDown[0] = leftDown;
+			io.MouseDown[1] = middleDown;
+			io.MouseDown[2] = rightDown;
+
+			io.MousePos = ImVec2((float)posX, (float)posY);
 		}
 	}
 }

@@ -10,7 +10,10 @@ namespace GameEngine
 
 	void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mod);
 	void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
-	void MouseCallback(GLFWwindow* window, double xpos, double ypos);
+	void MouseCallback(GLFWwindow* window, int button, int action, int mods);
+
+	bool mousePressed[3] = { false, false, false };
+	double mouseX, mouseY;
 
 	Platform_Windows::Platform_Windows(const char* windowName, int screenWidth, int screenHeight)
 	{
@@ -57,7 +60,7 @@ namespace GameEngine
 
 		// Set the required callback functions
 		glfwSetKeyCallback(window, KeyCallback);
-		glfwSetCursorPosCallback(window, MouseCallback);
+		glfwSetMouseButtonCallback(window, MouseCallback);
 		glfwSetScrollCallback(window, ScrollCallback);
 
 		// Options
@@ -108,7 +111,9 @@ namespace GameEngine
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 
+			// poll and update inputs
 			glfwPollEvents();
+			UpdateMouse();
 
 			m_Driver->PreUpdate();
 
@@ -118,21 +123,23 @@ namespace GameEngine
 
 			m_Driver->PostUpdate();
 
+			// start test
 			ImGui::NewFrame();
 
 			ImGui::Begin("Hello, world!");
 
 			ImGui::SetWindowSize(ImVec2(300, 150));
 
-			//ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-			//ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-			//ImGui::Checkbox("Another Window", &show_another_window);
+			ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+			ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+			ImGui::Checkbox("Another Window", &show_another_window);
 
-			//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-			//ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+			ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
 
 			ImGui::End();
 
+			glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
 			// end test
 
 			m_ImguiDriver->Render();
@@ -144,6 +151,25 @@ namespace GameEngine
 
 		engine->Destroy();
 		Destroy();
+
+		return 0;
+	}
+
+	int Platform_Windows::UpdateMouse()
+	{
+		// update imgui input
+		const bool focused = glfwGetWindowAttrib(window, GLFW_FOCUSED) != 0;
+
+		if (focused)
+		{
+			glfwGetCursorPos(window, &mouseX, &mouseY);
+
+			m_ImguiDriver->UpdateMouseState(mousePressed[0] || glfwGetMouseButton(window, 0), mousePressed[1] || glfwGetMouseButton(window, 1), mousePressed[2] || glfwGetMouseButton(window, 2), (int)mouseX, (int)mouseY);
+
+			mousePressed[0] = false;
+			mousePressed[1] = false;
+			mousePressed[2] = false;
+		}
 
 		return 0;
 	}
@@ -166,9 +192,14 @@ namespace GameEngine
 
 	}
 
-	void MouseCallback(GLFWwindow* window, double xpos, double ypos)
+	void MouseCallback(GLFWwindow* window, int button, int action, int mods)
 	{
-
+		if (action == GLFW_PRESS && button >= 0 && button < 3)
+		{
+			mousePressed[0] = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+			mousePressed[1] = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE);
+			mousePressed[2] = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+		}
 	}
 }
 

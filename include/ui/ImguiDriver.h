@@ -22,6 +22,8 @@ namespace GameEngine
 			int									Update(float dt);
 			int									Render();
 
+			void								UpdateMouseState(bool leftDown, bool middleDown, bool rightDown, int posX, int posY);
+
 		private:
 
 			DriverPtr							m_Driver;

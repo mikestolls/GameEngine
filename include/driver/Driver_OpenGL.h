@@ -8,7 +8,7 @@ namespace GameEngine
 	{
 	public:
 
-		enum DRIVER_CLEAR
+		enum
 		{
 			CLEAR_COLOR = 0x1,
 			CLEAR_DEPTH = 0x2,
@@ -30,7 +30,7 @@ namespace GameEngine
 		void							SetClearColor(glm::vec4 color) { SetClearColor(color.r, color.g, color.b, color.a);	}
 		virtual void					SetClearColor(float r, float g, float b, float a) = 0;
 
-		virtual void					Clear(DRIVER_CLEAR clear) = 0;
+		virtual void					Clear(int clear) = 0;
 
 	protected:
 		
@@ -53,6 +53,6 @@ namespace GameEngine
 
 		void							SetClearColor(float r, float g, float b, float a);
 
-		void							Clear(DRIVER_CLEAR clear);
+		void							Clear(int clear);
 	};
 }

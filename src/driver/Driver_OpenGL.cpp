@@ -27,13 +27,14 @@ namespace GameEngine
 
 	int Driver_OpenGL::PreUpdate()
 	{
+		glViewport(m_ViewportRect.a.x, m_ViewportRect.a.y, m_ViewportRect.b.x, m_ViewportRect.b.y);
+		Clear(CLEAR_COLOR | CLEAR_DEPTH | CLEAR_STENCIL);
+
 		return 0;
 	}
 
 	int Driver_OpenGL::PostUpdate()
 	{
-		glViewport(m_ViewportRect.a.x, m_ViewportRect.a.y, m_ViewportRect.b.x, m_ViewportRect.b.y);
-
 		return 0;
 	}
 
@@ -42,7 +43,7 @@ namespace GameEngine
 		glClearColor(r, g, b, a);
 	}
 
-	void Driver_OpenGL::Clear(DRIVER_CLEAR clear)
+	void Driver_OpenGL::Clear(int clear)
 	{
 		GLbitfield bitfield = 0x0;
 

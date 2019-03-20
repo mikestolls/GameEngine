@@ -40,6 +40,8 @@ namespace GameEngine
 
 	private:
 
+		int								UpdateMouse();
+
 		std::string						m_WindowName;
 
 		DriverPtr						m_Driver;
