@@ -134,7 +134,7 @@ namespace GameEngine
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glDisable(GL_CULL_FACE);
 			glDisable(GL_DEPTH_TEST);
-			//glEnable(GL_SCISSOR_TEST);
+			glEnable(GL_SCISSOR_TEST);
 #ifdef GL_POLYGON_MODE
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 #endif
@@ -179,10 +179,10 @@ namespace GameEngine
 					{
 						// Project scissor/clipping rectangles into framebuffer space
 						ImVec4 clipRect;
-						clipRect.x = (pcmd->ClipRect.x - clipOff.x) * clipOff.x;
-						clipRect.y = (pcmd->ClipRect.y - clipOff.y) * clipOff.y;
-						clipRect.z = (pcmd->ClipRect.z - clipOff.x) * clipOff.x;
-						clipRect.w = (pcmd->ClipRect.w - clipOff.y) * clipOff.y;
+						clipRect.x = (pcmd->ClipRect.x - clipOff.x) * clipScale.x;
+						clipRect.y = (pcmd->ClipRect.y - clipOff.y) * clipScale.y;
+						clipRect.z = (pcmd->ClipRect.z - clipOff.x) * clipScale.x;
+						clipRect.w = (pcmd->ClipRect.w - clipOff.y) * clipScale.y;
 
 						if (clipRect.x < fbWidth && clipRect.y < fbHeight && clipRect.z >= 0.0f && clipRect.w >= 0.0f)
 						{
