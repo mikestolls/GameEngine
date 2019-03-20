@@ -5,7 +5,7 @@ namespace GameEngine
 {
 	RenderSystem::RenderSystem()
 	{
-		Engine::GetInstance()->GetDriver()->SetClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+		Engine::GetInstance()->GetDriver()->SetClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	}
 
 	RenderSystem::~RenderSystem()

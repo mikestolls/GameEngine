@@ -70,6 +70,19 @@ namespace GameEngine
 		return false;
 	}
 
+	bool Shader_OpenGL::SetUniformVec2(const char* name, float* value)
+	{
+		unsigned int loc = 0;
+
+		if (GetUniformLocation(name, loc))
+		{
+			glUniform2f(loc, value[0], value[1]);
+			return true;
+		}
+
+		return false;
+	}
+
 	bool Shader_OpenGL::SetUniformVec3(const char* name, glm::vec3 value)
 	{
 		unsigned int loc = 0;
@@ -77,6 +90,19 @@ namespace GameEngine
 		if (GetUniformLocation(name, loc))
 		{
 			glUniform3f(loc, value.x, value.y, value.z);
+			return true;
+		}
+
+		return false;
+	}
+
+	bool Shader_OpenGL::SetUniformVec3(const char* name, float* value)
+	{
+		unsigned int loc = 0;
+
+		if (GetUniformLocation(name, loc))
+		{
+			glUniform3f(loc, value[0], value[1], value[2]);
 			return true;
 		}
 
@@ -96,6 +122,19 @@ namespace GameEngine
 		return false;
 	}
 
+	bool Shader_OpenGL::SetUniformVec4(const char* name, float* value)
+	{
+		unsigned int loc = 0;
+
+		if (GetUniformLocation(name, loc))
+		{
+			glUniform4f(loc, value[0], value[1], value[2], value[3]);
+			return true;
+		}
+
+		return false;
+	}
+
 	bool Shader_OpenGL::SetUniformMat3(const char* name, glm::mat3 value)
 	{
 		unsigned int loc = 0;
@@ -109,6 +148,19 @@ namespace GameEngine
 		return false;
 	}
 
+	bool Shader_OpenGL::SetUniformMat3(const char* name, float* value)
+	{
+		unsigned int loc = 0;
+
+		if (GetUniformLocation(name, loc))
+		{
+			glUniformMatrix3fv(loc, 1, GL_FALSE, value);
+			return true;
+		}
+
+		return false;
+	}
+
 	bool Shader_OpenGL::SetUniformMat4(const char* name, glm::mat4 value)
 	{
 		unsigned int loc = 0;
@@ -116,6 +168,19 @@ namespace GameEngine
 		if (GetUniformLocation(name, loc))
 		{
 			glUniformMatrix4fv(loc, 1, GL_FALSE, &value[0][0]);
+			return true;
+		}
+
+		return false;
+	}
+
+	bool Shader_OpenGL::SetUniformMat4(const char* name, float* value)
+	{
+		unsigned int loc = 0;
+
+		if (GetUniformLocation(name, loc))
+		{
+			glUniformMatrix4fv(loc, 1, GL_FALSE, value);
 			return true;
 		}
 

@@ -42,11 +42,19 @@ namespace GameEngine
 		virtual bool							SetUniformFloat1(const char* name, float value) = 0;
 
 		virtual bool							SetUniformVec2(const char* name, glm::vec2 value) = 0;
+		virtual bool							SetUniformVec2(const char* name, float* value) = 0;
+
 		virtual bool							SetUniformVec3(const char* name, glm::vec3 value) = 0;
+		virtual bool							SetUniformVec3(const char* name, float* value) = 0;
+
 		virtual bool							SetUniformVec4(const char* name, glm::vec4 value) = 0;
+		virtual bool							SetUniformVec4(const char* name, float* value) = 0;
 
 		virtual bool							SetUniformMat3(const char* name, glm::mat3 value) = 0;
+		virtual bool							SetUniformMat3(const char* name, float* value) = 0;
+
 		virtual bool							SetUniformMat4(const char* name, glm::mat4 value) = 0;
+		virtual bool							SetUniformMat4(const char* name, float* value) = 0;
 
 		virtual bool							GetUniformLocation(const char* uniform, unsigned int& location) = 0;
 		virtual void							Recompile(const char* defines = NULL) = 0;
@@ -80,11 +88,19 @@ namespace GameEngine
 		bool									SetUniformFloat1(const char* name, float value);
 
 		bool									SetUniformVec2(const char* name, glm::vec2 value);
+		virtual bool							SetUniformVec2(const char* name, float* value);
+
 		bool									SetUniformVec3(const char* name, glm::vec3 value);
+		virtual bool							SetUniformVec3(const char* name, float* value);
+
 		bool									SetUniformVec4(const char* name, glm::vec4 value);
+		virtual bool							SetUniformVec4(const char* name, float* value);
 
 		bool									SetUniformMat3(const char* name, glm::mat3 value);
+		bool									SetUniformMat3(const char* name, float* value);
+
 		bool									SetUniformMat4(const char* name, glm::mat4 value);
+		bool									SetUniformMat4(const char* name, float* value);
 
 		// get uniform location from shader
 		bool									GetUniformLocation(const char* uniform, unsigned int& location);

@@ -141,15 +141,10 @@ namespace GameEngine
 
 			// setup viewport and ortho proj matrix
 			glViewport(0, 0, (GLsizei)fbWidth, (GLsizei)fbHeight);
-
-			float halfWidth = (float)fbWidth * 0.5f;
-			float halfHeight = (float)fbHeight * 0.5f;
-			glm::mat4 projMat = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight);
-			//glm::mat4 projMat = glm::ortho(0, fbWidth, fbHeight, 0);
+			glm::mat4 projMat = glm::ortho(0.0f, (float)fbWidth, (float)fbHeight, 0.0f);
 
 			// activate material and set uniforms
 			m_Material->SetActive(0);
-			//m_Material->GetShader(0)->SetUniformInt1("Texture", 0);
 			m_Material->GetShader(0)->SetUniformMat4("ProjMat", projMat);
 
 			// activate and enable vb
@@ -216,7 +211,6 @@ namespace GameEngine
 			// clear down
 			glUseProgram(0);
 			glBindTexture(GL_TEXTURE_2D, 0);
-
 			glBindVertexArray(0);
 
 			return 0;

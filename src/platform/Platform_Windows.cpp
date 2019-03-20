@@ -96,45 +96,11 @@ namespace GameEngine
 		float deltaTime = 0.0f;
 		float lastFrame = 0.0f;
 
-		// start of test
-		/*
-		float halfWidth = (float)m_ScreenWidth * 0.5f;
-		float halfHeight = (float)m_ScreenHeight * 0.5f;
-		glm::mat4 projMat = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight);
-		MaterialPtr mat = Engine::GetInstance()->GetMaterialMgr()->CreateMaterial("imgui/imgui_material.mat");
-		mat->SetActive(0);
-
-		float vertices[] = {
-			-100.0f, -100.0f,
-			100.0f, -100.0f,
-			0.0f,  100.0f,
-		};
-
-		GLuint vbo;
-		GLuint vao;
-		glGenVertexArrays(1, &vao);
-		glBindVertexArray(vao);
-
-		glGenBuffers(1, &vbo); // Generate 1 buffer
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(
-			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			2,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-		);
-
-		glBindVertexArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		*/
-		// end of test
-
+		float f = 0.0f;
 		bool show_demo_window = true;
+		bool show_another_window = false;
+		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
 		while (!glfwWindowShouldClose(window))
 		{
 			// Set frame time
@@ -144,44 +110,30 @@ namespace GameEngine
 
 			glfwPollEvents();
 
-			//m_Driver->PreUpdate();
-
-			// start of test 
-			/*
-			mat->SetActive(0);
-			mat->GetShader(0)->SetUniformMat4("ProjMat", projMat);
-
-			glBindVertexArray(vao);
-			
-			// Draw the triangle !
-			glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-
-			glBindVertexArray(0);
-			*/
-			// end of test
+			m_Driver->PreUpdate();
 
 			// engine update
-			//engine->Update(deltaTime);
+			engine->Update(deltaTime);
 			m_ImguiDriver->Update(deltaTime);
 
-			//m_Driver->PostUpdate();
+			m_Driver->PostUpdate();
 
-			// test rendering some elements
 			ImGui::NewFrame();
 
 			ImGui::Begin("Hello, world!");
+
+			ImGui::SetWindowSize(ImVec2(300, 150));
+
+			//ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+			//ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+			//ImGui::Checkbox("Another Window", &show_another_window);
+
+			//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+			//ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+
 			ImGui::End();
 
 			// end test
-
-			/*ImGui::Render();
-			ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-			int display_w, display_h;
-			glfwMakeContextCurrent(window);
-			glfwGetFramebufferSize(window, &display_w, &display_h);
-			glViewport(0, 0, display_w, display_h);
-			glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-			glClear(GL_COLOR_BUFFER_BIT);*/
 
 			m_ImguiDriver->Render();
 
