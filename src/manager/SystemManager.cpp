@@ -16,7 +16,13 @@ namespace GameEngine
 	{
 		for (SystemPtr system : m_Systems)
 		{
-			system->Update(dt);
+			bool ret = system->Update(dt);
+
+			// a system wants to kill the app
+			if (ret != 0)
+			{
+				return ret;
+			}
 		}
 
 		return 0;

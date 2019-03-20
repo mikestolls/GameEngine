@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "system/RenderSystem.h"
+#include "system/EditorSystem.h"
 
 namespace GameEngine
 {
@@ -36,6 +37,7 @@ namespace GameEngine
 
 		// add systems
 		m_SystemMgr->RegisterSystem(std::make_shared<RenderSystem>());
+		m_SystemMgr->RegisterSystem(std::make_shared<EditorSystem>());
 
 		return 0;
 	}
@@ -48,11 +50,11 @@ namespace GameEngine
 	int Engine::Update(float dt)
 	{
 		// engine update
-		m_SystemMgr->Update(dt);
+		int ret = m_SystemMgr->Update(dt);
 
 		// engine render
 		m_SystemMgr->Render();
 
-		return 0;
+		return ret;
 	}
 }

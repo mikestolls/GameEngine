@@ -98,13 +98,9 @@ namespace GameEngine
 
 		float deltaTime = 0.0f;
 		float lastFrame = 0.0f;
+		bool shouldKill = false;
 
-		float f = 0.0f;
-		bool show_demo_window = true;
-		bool show_another_window = false;
-		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-		while (!glfwWindowShouldClose(window))
+		while (!glfwWindowShouldClose(window) && !shouldKill)
 		{
 			// Set frame time
 			float currentFrame = static_cast<float>(glfwGetTime());
@@ -119,25 +115,7 @@ namespace GameEngine
 			m_ImguiDriver->PreUpdate(deltaTime);
 
 			// engine update
-			engine->Update(deltaTime);
-
-			// start test
-			ImGui::Begin("Hello, world!");
-
-			ImGui::SetWindowSize(ImVec2(300, 150));
-
-			ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-			ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-			ImGui::Checkbox("Another Window", &show_another_window);
-
-			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-			ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-			ImGui::End();
-
-			glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-			// end test
-
+			shouldKill = engine->Update(deltaTime);
 
 			m_Driver->PostUpdate();
 			m_ImguiDriver->PostUpdate();

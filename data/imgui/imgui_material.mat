@@ -1,0 +1,8 @@
+{
+	"vertex_shader" : "imgui/imgui.vertex.glsl",
+	"fragment_shader" : "imgui/imgui.fragment.glsl",
+	"shader_defines" : "",
+	"uniforms" : [
+		{"type" : "int", "name" : "Texture", "value" : 0}
+	]
+}

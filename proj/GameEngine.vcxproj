@@ -140,6 +140,7 @@
     <ClInclude Include="..\include\rendering\Material.h" />
     <ClInclude Include="..\include\rendering\Shader_OpenGL.h" />
     <ClInclude Include="..\include\rendering\Texture_OpenGL.h" />
+    <ClInclude Include="..\include\system\EditorSystem.h" />
     <ClInclude Include="..\include\system\RenderSystem.h" />
     <ClInclude Include="..\include\ui\ImguiDriver.h" />
     <ClInclude Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="..\src\rendering\Material.cpp" />
     <ClCompile Include="..\src\rendering\Shader_OpenGL.cpp" />
     <ClCompile Include="..\src\rendering\Texture_OpenGL.cpp" />
+    <ClCompile Include="..\src\system\EditorSystem.cpp" />
     <ClCompile Include="..\src\system\RenderSystem.cpp" />
     <ClCompile Include="..\src\ui\ImguiDriver.cpp" />
     <ClCompile Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.c" />
