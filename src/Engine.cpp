@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "system/RenderSystem.h"
 #include "system/EditorSystem.h"
+#include "system/GameObjectSystem.h"
 
 namespace GameEngine
 {
@@ -38,6 +39,7 @@ namespace GameEngine
 		// add systems
 		m_SystemMgr->RegisterSystem(std::make_shared<RenderSystem>());
 		m_SystemMgr->RegisterSystem(std::make_shared<EditorSystem>());
+		m_SystemMgr->RegisterSystem(std::make_shared<GameObjectSystem>());
 
 		return 0;
 	}
