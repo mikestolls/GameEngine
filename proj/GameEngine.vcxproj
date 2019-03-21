@@ -139,6 +139,7 @@
     <ClInclude Include="..\include\manager\TextureManager.h" />
     <ClInclude Include="..\include\platform\Platform_Windows.h" />
     <ClInclude Include="..\include\rendering\Material.h" />
+    <ClInclude Include="..\include\rendering\Mesh.h" />
     <ClInclude Include="..\include\rendering\Shader_OpenGL.h" />
     <ClInclude Include="..\include\rendering\Texture_OpenGL.h" />
     <ClInclude Include="..\include\system\EditorSystem.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="..\src\manager\TextureManager.cpp" />
     <ClCompile Include="..\src\platform\Platform_Windows.cpp" />
     <ClCompile Include="..\src\rendering\Material.cpp" />
+    <ClCompile Include="..\src\rendering\Mesh.cpp" />
     <ClCompile Include="..\src\rendering\Shader_OpenGL.cpp" />
     <ClCompile Include="..\src\rendering\Texture_OpenGL.cpp" />
     <ClCompile Include="..\src\system\EditorSystem.cpp" />
