@@ -1,4 +1,4 @@
-#include "system/GameObjectSystem.h"
+#include "manager/GameObjectManager.h"
 #include "Engine.h"
 
 namespace GameEngine
@@ -27,32 +27,32 @@ namespace GameEngine
 		return 0;
 	}
 
-	GameObjectSystem::GameObjectSystem()
+	GameObjectManager::GameObjectManager()
 	{
 
 	}
 
-	GameObjectSystem::~GameObjectSystem()
+	GameObjectManager::~GameObjectManager()
 	{
 
 	}
 
-	int GameObjectSystem::Update(float dt)
-	{
-		return 0;
-	}
-
-	int GameObjectSystem::Render()
+	int GameObjectManager::Initialize()
 	{
 		return 0;
 	}
 
-	int GameObjectSystem::AddGameObject(GameObjectPtr obj)
+	int GameObjectManager::Destroy()
+	{
+		return 0;
+	}
+
+	int GameObjectManager::AddGameObject(GameObjectPtr obj)
 	{
 		return AddGameObject(obj, m_RootGameObj);
 	}
 
-	int GameObjectSystem::AddGameObject(GameObjectPtr obj, GameObjectPtr parent)
+	int GameObjectManager::AddGameObject(GameObjectPtr obj, GameObjectPtr parent)
 	{
 		parent->AddChild(obj);
 

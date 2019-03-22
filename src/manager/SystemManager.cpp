@@ -12,6 +12,16 @@ namespace GameEngine
 
 	}
 
+	int SystemManager::Initialize()
+	{
+		return 0;
+	}
+
+	int SystemManager::Destroy()
+	{
+		return 0;
+	}
+
 	int SystemManager::Update(float dt)
 	{
 		for (SystemPtr system : m_Systems)

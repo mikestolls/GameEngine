@@ -133,6 +133,7 @@
     <ClInclude Include="..\include\defines.h" />
     <ClInclude Include="..\include\driver\Driver_OpenGL.h" />
     <ClInclude Include="..\include\Engine.h" />
+    <ClInclude Include="..\include\manager\GameObjectManager.h" />
     <ClInclude Include="..\include\manager\MaterialManager.h" />
     <ClInclude Include="..\include\manager\ShaderManager.h" />
     <ClInclude Include="..\include\manager\SystemManager.h" />
@@ -143,7 +144,6 @@
     <ClInclude Include="..\include\rendering\Shader_OpenGL.h" />
     <ClInclude Include="..\include\rendering\Texture_OpenGL.h" />
     <ClInclude Include="..\include\system\EditorSystem.h" />
-    <ClInclude Include="..\include\system\GameObjectSystem.h" />
     <ClInclude Include="..\include\system\RenderSystem.h" />
     <ClInclude Include="..\include\ui\ImguiDriver.h" />
     <ClInclude Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.h" />
@@ -195,6 +195,7 @@
     <ClCompile Include="..\src\component\MeshComponent.cpp" />
     <ClCompile Include="..\src\driver\Driver_OpenGL.cpp" />
     <ClCompile Include="..\src\Engine.cpp" />
+    <ClCompile Include="..\src\manager\GameObjectManager.cpp" />
     <ClCompile Include="..\src\manager\MaterialManager.cpp" />
     <ClCompile Include="..\src\manager\ShaderManager.cpp" />
     <ClCompile Include="..\src\manager\SystemManager.cpp" />
@@ -205,7 +206,6 @@
     <ClCompile Include="..\src\rendering\Shader_OpenGL.cpp" />
     <ClCompile Include="..\src\rendering\Texture_OpenGL.cpp" />
     <ClCompile Include="..\src\system\EditorSystem.cpp" />
-    <ClCompile Include="..\src\system\GameObjectSystem.cpp" />
     <ClCompile Include="..\src\system\RenderSystem.cpp" />
     <ClCompile Include="..\src\ui\ImguiDriver.cpp" />
     <ClCompile Include="..\submodule\imgui\examples\libs\gl3w\GL\gl3w.c" />

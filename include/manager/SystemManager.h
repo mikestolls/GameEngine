@@ -21,8 +21,12 @@ namespace GameEngine
 											SystemManager();
 											~SystemManager();
 
+
+		int									Initialize();
+		int									Destroy();
+
 		int									Update(float dt);
-		int									Render();
+		int									Render(); // noteL remove this
 
 		void								RegisterSystem(SystemPtr system);
 		void								UnregisterSystem(SystemPtr system);

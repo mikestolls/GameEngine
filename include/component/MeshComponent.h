@@ -1,5 +1,5 @@
 #pragma once
-#include "system/GameObjectSystem.h"
+#include "manager/GameObjectManager.h"
 #include "rendering/Mesh.h"
 
 namespace GameEngine

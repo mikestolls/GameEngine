@@ -1,5 +1,5 @@
 #pragma once
-#include "manager/SystemManager.h"
+#include "defines.h"
 
 namespace GameEngine
 {
@@ -36,14 +36,14 @@ namespace GameEngine
 		std::vector<IComponentPtr>					m_Components;
 	};
 
-	class GameObjectSystem : public ISystem
+	class GameObjectManager
 	{
 	public:
-													GameObjectSystem();
-													~GameObjectSystem();
+													GameObjectManager();
+													~GameObjectManager();
 
-		int											Update(float dt);
-		int											Render();
+		int											Initialize();
+		int											Destroy();
 
 		int											AddGameObject(GameObjectPtr obj);
 		int											AddGameObject(GameObjectPtr obj, GameObjectPtr parent);
@@ -52,4 +52,6 @@ namespace GameEngine
 
 		GameObjectPtr								m_RootGameObj;
 	};
+
+	typedef std::shared_ptr<GameObjectManager>		GameObjectManagerPtr;
 }
