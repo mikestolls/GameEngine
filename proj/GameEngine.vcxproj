@@ -86,7 +86,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;D:\Development\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;../submodule/assimp/include;D:\Development\glm</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -106,7 +106,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;D:\Development\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;../submodule/assimp/include;D:\Development\glm</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>

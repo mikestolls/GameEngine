@@ -22,7 +22,7 @@ namespace GameEngine
 
 	int EditorSystem::Update(float dt)
 	{
-		bool ret = 0;
+		int ret = 0;
 
 		if (ImGui::BeginMainMenuBar())
 		{

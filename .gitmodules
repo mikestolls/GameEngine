@@ -10,3 +10,6 @@
 [submodule "submodule/rapidjson"]
 	path = submodule/rapidjson
 	url = https://github.com/Tencent/rapidjson.git
+[submodule "submodule/assimp"]
+	path = submodule/assimp
+	url = https://github.com/assimp/assimp.git
