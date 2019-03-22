@@ -5,6 +5,8 @@
 #include "rendering/Texture_OpenGL.h"
 #include "manager/MaterialManager.h"
 
+#include "EventArgs.h"
+
 namespace GameEngine
 {
 	namespace UI
@@ -19,8 +21,8 @@ namespace GameEngine
 			int									Initialize(void* handle, int screenWidth, int screenHeight, DriverPtr driver);
 			int									Destroy();
 
-			void								PreUpdate();
-			void								PostUpdate();
+			void								PreUpdate(EventArgs args);
+			void								PostUpdate(EventArgs args);
 
 			void								UpdateMouseState(bool leftDown, bool middleDown, bool rightDown, int posX, int posY);
 

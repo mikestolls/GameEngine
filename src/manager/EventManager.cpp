@@ -30,7 +30,7 @@ namespace GameEngine
 		return 0;
 	}
 
-	int EventManager::SendEvent(std::string eventName)
+	int EventManager::SendEvent(std::string eventName, EventArgs args)
 	{
 		int count = 0;
 
@@ -44,7 +44,7 @@ namespace GameEngine
 		// loop over listener callbacks and dispatch
 		for (auto vitr = itr->second.begin(); vitr != itr->second.end(); vitr++)
 		{
-			(*vitr)();
+			(*vitr)(args);
 			count++;
 		}
 

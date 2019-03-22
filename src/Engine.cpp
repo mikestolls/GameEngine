@@ -56,7 +56,7 @@ namespace GameEngine
 		m_GameObjectMgr->Initialize();
 		m_EventMgr->Initialize();
 
-		m_EventMgr->RegisterEventListener("Frame_Update", std::bind(&Engine::Update, this));
+		m_EventMgr->RegisterEventListener("Frame_Update", std::bind(&Engine::Update, this, std::placeholders::_1));
 
 		return 0;
 	}
@@ -66,7 +66,7 @@ namespace GameEngine
 		return 0;
 	}
 
-	int Engine::Update()
+	int Engine::Update(EventArgs args)
 	{
 		// engine update
 		m_EventMgr->SendEvent("System_Update");

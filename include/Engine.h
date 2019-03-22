@@ -1,6 +1,5 @@
 #pragma once
 
-#include "platform/Platform_Windows.h"
 #include "driver/Driver_OpenGL.h"
 #include "ui/ImguiDriver.h"
 #include "manager/SystemManager.h"
@@ -9,6 +8,8 @@
 #include "manager/TextureManager.h"
 #include "manager/GameObjectManager.h"
 #include "manager/EventManager.h"
+
+#include "EventArgs.h"
 
 namespace GameEngine
 {
@@ -21,10 +22,7 @@ namespace GameEngine
 		int								Initialize(DriverPtr driver);
 		int								Destroy();
 
-		int								Update();
-
-		inline void						SetDeltaTime(float dt) { m_DeltaTime = dt; }
-		inline float					GetDeltaTime() { return m_DeltaTime; }
+		int								Update(EventArgs args);
 
 		inline DriverPtr				GetDriver() { return m_Driver; }
 		inline ShaderManagerPtr			GetShaderMgr() { return m_ShaderMgr; }
@@ -40,7 +38,7 @@ namespace GameEngine
 
 		static Engine*					s_Instance;
 
-		float							m_DeltaTime;
+		bool							m_RequestDestroy;
 
 		DriverPtr						m_Driver;
 		SystemManagerPtr				m_SystemMgr;

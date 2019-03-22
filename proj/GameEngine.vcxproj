@@ -133,6 +133,7 @@
     <ClInclude Include="..\include\defines.h" />
     <ClInclude Include="..\include\driver\Driver_OpenGL.h" />
     <ClInclude Include="..\include\Engine.h" />
+    <ClInclude Include="..\include\EventArgs.h" />
     <ClInclude Include="..\include\manager\EventManager.h" />
     <ClInclude Include="..\include\manager\GameObjectManager.h" />
     <ClInclude Include="..\include\manager\MaterialManager.h" />

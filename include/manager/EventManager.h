@@ -5,7 +5,12 @@
 
 namespace GameEngine
 {
-	typedef std::function<void()>											EventCallbackFunc;
+	struct EventArgs
+	{
+
+	};
+
+	typedef std::function<void(EventArgs)>									EventCallbackFunc;
 
 	class EventManager
 	{
@@ -18,8 +23,9 @@ namespace GameEngine
 		int																	Destroy();
 					
 		int																	RegisterEventListener(std::string eventName, EventCallbackFunc function);
-		
-		int																	SendEvent(std::string eventName);
+
+		int																	SendEvent(std::string eventName, EventArgs args);
+		int																	SendEvent(std::string eventName) { return SendEvent(eventName, EventArgs()); }
 
 	private:
 

@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "platform/Platform_Windows.h"
-#include "Engine.h"
 
 #include "imgui.h"
 
@@ -20,6 +19,7 @@ namespace GameEngine
 		m_WindowName = windowName;
 		m_ScreenWidth = screenWidth;
 		m_ScreenHeight = screenHeight;
+		m_IsRunning = true;
 	}
 
 	Platform_Windows::~Platform_Windows()
@@ -96,29 +96,37 @@ namespace GameEngine
 		Engine* engine = Engine::GetInstance();
 		engine->Initialize(m_Driver);
 
+		engine->GetEventMgr()->RegisterEventListener("Platform_Shutdown", std::bind(&Platform_Windows::Shutdown, this));
+
 		float deltaTime = 0.0f;
 		float lastFrame = 0.0f;
-		bool shouldKill = false;
 
-		while (!glfwWindowShouldClose(window) && !shouldKill)
+		while (m_IsRunning)
 		{
+			// check for window close
+			if (glfwWindowShouldClose(window))
+			{
+				m_IsRunning = false;
+			}
+
 			// Set frame time
 			float currentFrame = static_cast<float>(glfwGetTime());
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 
-			engine->SetDeltaTime(deltaTime);
-
 			// poll and update inputs
 			glfwPollEvents();
 			UpdateMouse();
 
-			engine->GetEventMgr()->SendEvent("Frame_PreUpdate");
+			FrameEventArgs args;
+			args.deltaTime = deltaTime;
 
-			engine->GetEventMgr()->SendEvent("Frame_Update");
-			engine->GetEventMgr()->SendEvent("Frame_Render");
+			engine->GetEventMgr()->SendEvent("Frame_PreUpdate", args);
 
-			engine->GetEventMgr()->SendEvent("Frame_PostUpdate");
+			engine->GetEventMgr()->SendEvent("Frame_Update", args);
+			engine->GetEventMgr()->SendEvent("Frame_Render", args);
+
+			engine->GetEventMgr()->SendEvent("Frame_PostUpdate", args);
 
 			// Swap buffers
 			glfwMakeContextCurrent(window);
@@ -129,6 +137,11 @@ namespace GameEngine
 		Destroy();
 
 		return 0;
+	}
+
+	void Platform_Windows::Shutdown()
+	{
+		m_IsRunning = false;
 	}
 
 	int Platform_Windows::UpdateMouse()

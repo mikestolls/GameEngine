@@ -1,6 +1,8 @@
 #pragma once
 #include "manager/SystemManager.h"
 
+#include "EventArgs.h"
+
 namespace GameEngine
 {
 	class RenderSystem : public ISystem
@@ -12,6 +14,6 @@ namespace GameEngine
 		int							Initialize();
 		int							Destroy();
 
-		void						Update();
+		void						Update(EventArgs args);
 	};
 }

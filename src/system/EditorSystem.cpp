@@ -44,7 +44,7 @@ namespace GameEngine
 				ImGui::MenuItem("Open Scene");
 				if (ImGui::MenuItem("Exit"))
 				{
-					ret = -1;
+					Engine::GetInstance()->GetEventMgr()->SendEvent("Platform_Shutdown");
 				}
 
 				ImGui::EndMenu();

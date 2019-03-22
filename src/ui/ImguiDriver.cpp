@@ -72,8 +72,8 @@ namespace GameEngine
 			glBindTexture(GL_TEXTURE_2D, 0);
 
 			// setup frame event callback
-			Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PreUpdate", std::bind(&ImguiDriver::PreUpdate, this));
-			Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PostUpdate", std::bind(&ImguiDriver::PostUpdate, this));
+			Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PreUpdate", std::bind(&ImguiDriver::PreUpdate, this, std::placeholders::_1));
+			Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PostUpdate", std::bind(&ImguiDriver::PostUpdate, this, std::placeholders::_1));
 
 			return 0;
 		}
@@ -105,16 +105,18 @@ namespace GameEngine
 			return 0;
 		}
 
-		void ImguiDriver::PreUpdate()
+		void ImguiDriver::PreUpdate(EventArgs args)
 		{
+			FrameEventArgs* frameEventArgs = static_cast<FrameEventArgs*>(&args);
+
 			ImGuiIO& io = ImGui::GetIO();
 
-			io.DeltaTime = Engine::GetInstance()->GetDeltaTime();
+			io.DeltaTime = frameEventArgs->deltaTime;
 			
 			ImGui::NewFrame();
 		}
 
-		void ImguiDriver::PostUpdate()
+		void ImguiDriver::PostUpdate(EventArgs args)
 		{
 			ImGui::Render();
 
