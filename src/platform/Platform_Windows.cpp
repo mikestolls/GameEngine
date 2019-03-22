@@ -107,18 +107,18 @@ namespace GameEngine
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 
+			engine->SetDeltaTime(deltaTime);
+
 			// poll and update inputs
 			glfwPollEvents();
 			UpdateMouse();
 
-			m_Driver->PreUpdate();
-			m_ImguiDriver->PreUpdate(deltaTime);
+			engine->GetEventMgr()->SendEvent("Frame_PreUpdate");
 
-			// engine update
-			shouldKill = engine->Update(deltaTime);
+			engine->GetEventMgr()->SendEvent("Frame_Update");
+			engine->GetEventMgr()->SendEvent("Frame_Render");
 
-			m_Driver->PostUpdate();
-			m_ImguiDriver->PostUpdate();
+			engine->GetEventMgr()->SendEvent("Frame_PostUpdate");
 
 			// Swap buffers
 			glfwMakeContextCurrent(window);

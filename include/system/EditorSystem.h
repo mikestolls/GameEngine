@@ -9,8 +9,10 @@ namespace GameEngine
 									EditorSystem();
 									~EditorSystem();
 
-		int							Update(float dt);
-		int							Render();
+		int							Initialize();
+		int							Destroy();
+
+		void						Update();
 
 	};
 }

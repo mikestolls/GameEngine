@@ -133,6 +133,7 @@
     <ClInclude Include="..\include\defines.h" />
     <ClInclude Include="..\include\driver\Driver_OpenGL.h" />
     <ClInclude Include="..\include\Engine.h" />
+    <ClInclude Include="..\include\manager\EventManager.h" />
     <ClInclude Include="..\include\manager\GameObjectManager.h" />
     <ClInclude Include="..\include\manager\MaterialManager.h" />
     <ClInclude Include="..\include\manager\ShaderManager.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="..\src\component\MeshComponent.cpp" />
     <ClCompile Include="..\src\driver\Driver_OpenGL.cpp" />
     <ClCompile Include="..\src\Engine.cpp" />
+    <ClCompile Include="..\src\manager\EventManager.cpp" />
     <ClCompile Include="..\src\manager\GameObjectManager.cpp" />
     <ClCompile Include="..\src\manager\MaterialManager.cpp" />
     <ClCompile Include="..\src\manager\ShaderManager.cpp" />

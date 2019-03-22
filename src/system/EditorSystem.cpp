@@ -20,7 +20,19 @@ namespace GameEngine
 
 	}
 
-	int EditorSystem::Update(float dt)
+	int EditorSystem::Initialize()
+	{
+		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("System_Update", std::bind(&EditorSystem::Update, this));
+
+		return 0;
+	}
+
+	int EditorSystem::Destroy()
+	{
+		return 0;
+	}
+
+	void EditorSystem::Update()
 	{
 		int ret = 0;
 
@@ -64,12 +76,5 @@ namespace GameEngine
 
 		Engine::GetInstance()->GetDriver()->SetClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
 		// end test
-
-		return ret;
-	}
-
-	int EditorSystem::Render()
-	{
-		return 0;
 	}
 }

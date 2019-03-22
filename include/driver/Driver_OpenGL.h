@@ -21,8 +21,8 @@ namespace GameEngine
 		virtual int						Initialize() = 0;
 		virtual int						Destroy() = 0;
 
-		virtual int						PreUpdate() = 0;
-		virtual int						PostUpdate() = 0;
+		virtual void					PreUpdate() = 0;
+		virtual void					PostUpdate() = 0;
 
 		inline void						SetViewport(Math::Recti viewport) { m_ViewportRect = viewport; }
 		inline void						SetViewport(glm::vec2 a, glm::vec2 b) { m_ViewportRect.a = a; m_ViewportRect.b = b; }
@@ -48,8 +48,8 @@ namespace GameEngine
 		int								Initialize();
 		int								Destroy();
 
-		int								PreUpdate();
-		int								PostUpdate();
+		void							PreUpdate();
+		void							PostUpdate();
 
 		void							SetClearColor(float r, float g, float b, float a);
 

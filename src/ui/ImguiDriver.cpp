@@ -71,6 +71,10 @@ namespace GameEngine
 			// Restore state
 			glBindTexture(GL_TEXTURE_2D, 0);
 
+			// setup frame event callback
+			Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PreUpdate", std::bind(&ImguiDriver::PreUpdate, this));
+			Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PostUpdate", std::bind(&ImguiDriver::PostUpdate, this));
+
 			return 0;
 		}
 
@@ -101,18 +105,16 @@ namespace GameEngine
 			return 0;
 		}
 
-		int ImguiDriver::PreUpdate(float dt)
+		void ImguiDriver::PreUpdate()
 		{
 			ImGuiIO& io = ImGui::GetIO();
 
-			io.DeltaTime = dt;
+			io.DeltaTime = Engine::GetInstance()->GetDeltaTime();
 			
 			ImGui::NewFrame();
-
-			return 0;
 		}
 
-		int ImguiDriver::PostUpdate()
+		void ImguiDriver::PostUpdate()
 		{
 			ImGui::Render();
 
@@ -124,7 +126,7 @@ namespace GameEngine
 
 			if (fbWidth <= 0 || fbHeight <= 0)
 			{
-				return 0;
+				return;
 			}
 
 			// setup open gl state
@@ -216,8 +218,6 @@ namespace GameEngine
 			glBindVertexArray(0);
 			glDisable(GL_SCISSOR_TEST);
 			glDisable(GL_BLEND);
-
-			return 0;
 		}
 
 		void ImguiDriver::UpdateMouseState(bool leftDown, bool middleDown, bool rightDown, int posX, int posY)

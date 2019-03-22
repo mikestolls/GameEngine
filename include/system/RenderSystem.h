@@ -8,9 +8,10 @@ namespace GameEngine
 	public:
 									RenderSystem();
 									~RenderSystem();
+																	   
+		int							Initialize();
+		int							Destroy();
 
-		int							Update(float dt);
-		int							Render();
-
+		void						Update();
 	};
 }

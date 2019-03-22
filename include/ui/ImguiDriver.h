@@ -19,8 +19,8 @@ namespace GameEngine
 			int									Initialize(void* handle, int screenWidth, int screenHeight, DriverPtr driver);
 			int									Destroy();
 
-			int									PreUpdate(float dt);
-			int									PostUpdate();
+			void								PreUpdate();
+			void								PostUpdate();
 
 			void								UpdateMouseState(bool leftDown, bool middleDown, bool rightDown, int posX, int posY);
 

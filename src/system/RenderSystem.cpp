@@ -17,15 +17,20 @@ namespace GameEngine
 
 	}
 
-	int RenderSystem::Update(float dt)
+	int RenderSystem::Initialize()
 	{
-		Engine::GetInstance()->GetDriver()->Clear(IDriver::CLEAR_COLOR);
+		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("System_Update", std::bind(&RenderSystem::Update, this));
 
 		return 0;
 	}
 
-	int RenderSystem::Render()
+	int RenderSystem::Destroy()
 	{
 		return 0;
+	}
+
+	void RenderSystem::Update()
+	{
+		Engine::GetInstance()->GetDriver()->Clear(IDriver::CLEAR_COLOR);
 	}
 }

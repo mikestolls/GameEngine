@@ -9,11 +9,12 @@ namespace GameEngine
 											ISystem() { }
 		virtual 							~ISystem() { }
 
-		virtual int							Update(float dt) = 0;
-		virtual int							Render() = 0;
+
+		virtual int							Initialize() = 0;
+		virtual int							Destroy() = 0;
 	};
 
-	typedef std::shared_ptr<ISystem>		SystemPtr;
+	typedef std::shared_ptr<ISystem>		ISystemPtr;
 
 	class SystemManager
 	{
@@ -25,15 +26,9 @@ namespace GameEngine
 		int									Initialize();
 		int									Destroy();
 
-		int									Update(float dt);
-		int									Render(); // noteL remove this
-
-		void								RegisterSystem(SystemPtr system);
-		void								UnregisterSystem(SystemPtr system);
-
 	private:
 
-		std::vector<SystemPtr>				m_Systems;
+		std::vector< ISystemPtr>			m_Systems;
 	};
 
 	typedef std::shared_ptr<SystemManager>	SystemManagerPtr;
