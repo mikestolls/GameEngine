@@ -215,7 +215,6 @@ namespace GameEngine
 			}
 
 			// clear down
-			glUseProgram(0);
 			glBindTexture(GL_TEXTURE_2D, 0);
 			glBindVertexArray(0);
 			glDisable(GL_SCISSOR_TEST);

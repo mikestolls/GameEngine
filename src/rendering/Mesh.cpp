@@ -47,8 +47,8 @@ namespace GameEngine
 		glm::mat4 scale = glm::mat4(1.0f);
 
 		glm::mat4 modelMat = translation * rotation * scale;
-		glm::mat4 projMat = glm::perspective(1136.0f / 640.0f, glm::radians(45.0f), 0.1f, 2000.0f);
-		glm::mat4 viewMat = glm::lookAt(glm::vec3(0.0f, 0.0f, -100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 projMat = glm::perspective(1.3333f, glm::radians(45.0f), 0.1f, 2000.0f);
+		glm::mat4 viewMat = glm::lookAt(glm::vec3(0.0f, 0.0f, 100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		
 		glBindVertexArray(m_VertexArrayID);
 

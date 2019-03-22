@@ -71,6 +71,8 @@ namespace GameEngine
 
 		m_Driver = std::make_shared<Driver_OpenGL>();
 		m_Driver->Initialize();
+		m_Driver->SetViewport(glm::vec2(0.0f, 0.0f), glm::vec2(m_ScreenWidth, m_ScreenHeight));
+
 
 		m_ImguiDriver = std::make_shared<GameEngine::UI::ImguiDriver>();
 		m_ImguiDriver->Initialize((void*)glfwGetWin32Window(window), m_ScreenWidth, m_ScreenHeight, m_Driver);

@@ -10,5 +10,5 @@ uniform sampler2D Texture;
 
 void main()
 {
-	color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	color = vec4(fs_in.color, 1.0f);
 }
