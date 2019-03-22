@@ -124,7 +124,6 @@ namespace GameEngine
 			engine->GetEventMgr()->SendEvent("Frame_PreUpdate", args);
 
 			engine->GetEventMgr()->SendEvent("Frame_Update", args);
-			engine->GetEventMgr()->SendEvent("Frame_Render", args);
 
 			engine->GetEventMgr()->SendEvent("Frame_PostUpdate", args);
 

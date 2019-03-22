@@ -3,6 +3,7 @@
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
+#include <rendering/Material.h>
 
 namespace GameEngine
 {
@@ -13,6 +14,8 @@ namespace GameEngine
 											Mesh(const char* meshFilename);
 											~Mesh();
 											
+		void								Render();
+
 	private:
 
 		void								ConstructScene();
@@ -39,6 +42,8 @@ namespace GameEngine
 
 		Assimp::Importer					m_Importer;
 		const aiScene*						m_Scene;
+
+		MaterialPtr							m_Material;
 	};
 
 	typedef std::shared_ptr<Mesh>			MeshPtr;

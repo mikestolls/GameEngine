@@ -10,6 +10,7 @@ namespace GameEngine
 		Engine::GetInstance()->GetDriver()->SetClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
 		MeshPtr mesh = std::make_shared<Mesh>("mesh/minifig.fbx");
+		m_Meshes.push_back(mesh);
 	}
 
 	RenderSystem::~RenderSystem()
@@ -32,5 +33,11 @@ namespace GameEngine
 	void RenderSystem::Update(EventArgs args)
 	{
 		Engine::GetInstance()->GetDriver()->Clear(IDriver::CLEAR_COLOR);
+
+		// attempt to draw test mesh
+		for (auto itr = m_Meshes.begin(); itr != m_Meshes.end(); itr++)
+		{
+			(*itr)->Render();
+		}
 	}
 }

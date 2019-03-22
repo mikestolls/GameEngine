@@ -1,7 +1,7 @@
 #pragma once
 #include "manager/SystemManager.h"
-
 #include "EventArgs.h"
+#include "rendering/Mesh.h"
 
 namespace GameEngine
 {
@@ -15,5 +15,9 @@ namespace GameEngine
 		int							Destroy();
 
 		void						Update(EventArgs args);
+
+	private:
+		
+		std::vector<MeshPtr>		m_Meshes;
 	};
 }
