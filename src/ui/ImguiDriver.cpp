@@ -105,7 +105,7 @@ namespace GameEngine
 			return 0;
 		}
 
-		void ImguiDriver::PreUpdate(EventArgs args)
+		void ImguiDriver::PreUpdate(EventArgs& args)
 		{
 			FrameEventArgs* frameEventArgs = static_cast<FrameEventArgs*>(&args);
 
@@ -116,7 +116,7 @@ namespace GameEngine
 			ImGui::NewFrame();
 		}
 
-		void ImguiDriver::PostUpdate(EventArgs args)
+		void ImguiDriver::PostUpdate(EventArgs& args)
 		{
 			ImGui::Render();
 

@@ -3,6 +3,9 @@
 
 #include "imgui.h"
 
+
+#include "component/MeshComponent.h"
+
 namespace GameEngine
 {
 	GLFWwindow* window; // (In the accompanying source code, this variable is global)
@@ -98,6 +101,13 @@ namespace GameEngine
 		Engine* engine = Engine::GetInstance();
 		engine->Initialize(m_Driver);
 
+		// init test scene
+		GameObjectPtr obj = std::make_shared<GameObject>();
+		obj->AddComponent(std::make_shared<MeshComponent>());
+
+		engine->GetGameObjectMgr()->AddGameObject(obj);
+		// end of test
+
 		engine->GetEventMgr()->RegisterEventListener("Platform_Shutdown", std::bind(&Platform_Windows::Shutdown, this));
 
 		float deltaTime = 0.0f;
@@ -120,8 +130,7 @@ namespace GameEngine
 			glfwPollEvents();
 			UpdateMouse();
 
-			FrameEventArgs args;
-			args.deltaTime = deltaTime;
+			FrameEventArgs args(deltaTime);
 
 			engine->GetEventMgr()->SendEvent("Frame_PreUpdate", args);
 

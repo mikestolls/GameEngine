@@ -10,6 +10,8 @@ namespace GameEngine
 											MeshComponent();
 											~MeshComponent();
 
+		inline MeshPtr						GetMesh() { return m_Mesh; }
+
 	private:
 
 		MeshPtr								m_Mesh;

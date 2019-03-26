@@ -39,6 +39,7 @@ namespace GameEngine
 
 	int GameObjectManager::Initialize()
 	{
+		m_RootGameObj = std::make_shared<GameObject>();
 		return 0;
 	}
 
@@ -55,6 +56,10 @@ namespace GameEngine
 	int GameObjectManager::AddGameObject(GameObjectPtr obj, GameObjectPtr parent)
 	{
 		parent->AddChild(obj);
+	
+		GameObjectEventArgs args(obj);
+		args.gameObj = obj;
+		Engine::GetInstance()->GetEventMgr()->SendEvent("GameObject_Add", args);
 
 		return 0;
 	}

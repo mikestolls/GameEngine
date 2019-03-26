@@ -21,12 +21,12 @@ namespace GameEngine
 			int									Initialize(void* handle, int screenWidth, int screenHeight, DriverPtr driver);
 			int									Destroy();
 
-			void								PreUpdate(EventArgs args);
-			void								PostUpdate(EventArgs args);
-
 			void								UpdateMouseState(bool leftDown, bool middleDown, bool rightDown, int posX, int posY);
 
 		private:
+
+			void								PreUpdate(EventArgs& args);
+			void								PostUpdate(EventArgs& args);
 
 			DriverPtr							m_Driver;
 			MaterialPtr							m_Material;

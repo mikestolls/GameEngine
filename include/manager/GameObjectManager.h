@@ -30,6 +30,22 @@ namespace GameEngine
 		int											AddChild(GameObjectPtr obj);
 		int											AddComponent(IComponentPtr component);
 
+		template <typename T>
+		T*											GetComponent()
+		{
+			for (auto itr = m_Components.begin(); itr != m_Components.end(); itr++)
+			{
+				// if true than the class matches. Note: im sure there is a way to improve this
+				T* comp = dynamic_cast<T*>((*itr).get());
+				if (comp)
+				{
+					return comp;
+				}
+			}
+
+			return nullptr;
+		}
+
 	private:
 
 		std::vector<GameObjectPtr>					m_Children;

@@ -7,10 +7,10 @@ namespace GameEngine
 {
 	struct EventArgs
 	{
-
+		EventArgs() { }
 	};
 
-	typedef std::function<void(EventArgs)>									EventCallbackFunc;
+	typedef std::function<void(EventArgs&)>									EventCallbackFunc;
 
 	class EventManager
 	{
@@ -24,8 +24,8 @@ namespace GameEngine
 					
 		int																	RegisterEventListener(std::string eventName, EventCallbackFunc function);
 
-		int																	SendEvent(std::string eventName, EventArgs args);
-		int																	SendEvent(std::string eventName) { return SendEvent(eventName, EventArgs()); }
+		int																	SendEvent(std::string eventName, EventArgs &args);
+		int																	SendEvent(std::string eventName) { EventArgs args;  return SendEvent(eventName, args); }
 
 	private:
 

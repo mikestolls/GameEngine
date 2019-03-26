@@ -14,10 +14,13 @@ namespace GameEngine
 		int							Initialize();
 		int							Destroy();
 
-		void						Update(EventArgs args);
-
 	private:
+
+		void						Update(EventArgs& args);
+
+		void						GameObjectAdd(EventArgs& args);
+		void						GameObjectRemove(EventArgs& args);
 		
-		std::vector<MeshPtr>		m_Meshes;
+		std::vector<GameObjectPtr>	m_GameObjects;
 	};
 }

@@ -30,7 +30,7 @@ namespace GameEngine
 		return 0;
 	}
 
-	int EventManager::SendEvent(std::string eventName, EventArgs args)
+	int EventManager::SendEvent(std::string eventName, EventArgs& args)
 	{
 		int count = 0;
 

@@ -66,7 +66,7 @@ namespace GameEngine
 		return 0;
 	}
 
-	int Engine::Update(EventArgs args)
+	int Engine::Update(EventArgs& args)
 	{
 		// engine update
 		m_EventMgr->SendEvent("System_Update");

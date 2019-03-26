@@ -12,7 +12,8 @@ namespace GameEngine
 		int							Initialize();
 		int							Destroy();
 
-		void						Update();
+	private:
 
+		void						Update();
 	};
 }

@@ -22,8 +22,6 @@ namespace GameEngine
 		int								Initialize(DriverPtr driver);
 		int								Destroy();
 
-		int								Update(EventArgs args);
-
 		inline DriverPtr				GetDriver() { return m_Driver; }
 		inline ShaderManagerPtr			GetShaderMgr() { return m_ShaderMgr; }
 		inline MaterialManagerPtr		GetMaterialMgr() { return m_MaterialMgr; }
@@ -35,6 +33,8 @@ namespace GameEngine
 
 										Engine();
 										~Engine();
+
+		int								Update(EventArgs& args);
 
 		static Engine*					s_Instance;
 
