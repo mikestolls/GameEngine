@@ -1,5 +1,7 @@
 #pragma once
 #include "defines.h"
+
+#include "Engine.h"
 #include "driver/Driver_OpenGL.h"
 #include "ui/ImguiDriver.h"
 
@@ -38,9 +40,13 @@ namespace GameEngine
 		
 		int								Run();
 
+		void							Shutdown();
+
 	private:
 
 		int								UpdateMouse();
+
+		bool							m_IsRunning;
 
 		std::string						m_WindowName;
 

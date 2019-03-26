@@ -1,5 +1,4 @@
 #pragma once
-
 #include "defines.h"
 
 #include "rendering/Texture_OpenGL.h"
@@ -12,6 +11,9 @@ namespace GameEngine
 
 												TextureManager();
 												~TextureManager();
+
+		int										Initialize();
+		int										Destroy();
 
 		TexturePtr								CreateTexture(const char* textureFilename);
 		TexturePtr								CreateTexture(const char* hasname, unsigned int width, unsigned int height, int internalFormat, int format, int type, void* data);

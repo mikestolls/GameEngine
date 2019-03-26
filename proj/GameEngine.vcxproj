@@ -86,7 +86,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;D:\Development\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;../submodule/assimp/include;D:\Development\glm</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -106,7 +106,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;D:\Development\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../submodule/imgui/examples/libs/glfw/include;../submodule/imgui/examples/libs/gl3w;../submodule/imgui;../submodule/rapidjson/include;../submodule/assimp/include;D:\Development\glm</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -129,15 +129,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\component\MeshComponent.h" />
     <ClInclude Include="..\include\defines.h" />
     <ClInclude Include="..\include\driver\Driver_OpenGL.h" />
     <ClInclude Include="..\include\Engine.h" />
+    <ClInclude Include="..\include\EventArgs.h" />
+    <ClInclude Include="..\include\manager\EventManager.h" />
+    <ClInclude Include="..\include\manager\GameObjectManager.h" />
     <ClInclude Include="..\include\manager\MaterialManager.h" />
     <ClInclude Include="..\include\manager\ShaderManager.h" />
     <ClInclude Include="..\include\manager\SystemManager.h" />
     <ClInclude Include="..\include\manager\TextureManager.h" />
     <ClInclude Include="..\include\platform\Platform_Windows.h" />
     <ClInclude Include="..\include\rendering\Material.h" />
+    <ClInclude Include="..\include\rendering\Mesh.h" />
     <ClInclude Include="..\include\rendering\Shader_OpenGL.h" />
     <ClInclude Include="..\include\rendering\Texture_OpenGL.h" />
     <ClInclude Include="..\include\system\EditorSystem.h" />
@@ -189,14 +194,18 @@
     <ClInclude Include="..\submodule\rapidjson\include\rapidjson\writer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\component\MeshComponent.cpp" />
     <ClCompile Include="..\src\driver\Driver_OpenGL.cpp" />
     <ClCompile Include="..\src\Engine.cpp" />
+    <ClCompile Include="..\src\manager\EventManager.cpp" />
+    <ClCompile Include="..\src\manager\GameObjectManager.cpp" />
     <ClCompile Include="..\src\manager\MaterialManager.cpp" />
     <ClCompile Include="..\src\manager\ShaderManager.cpp" />
     <ClCompile Include="..\src\manager\SystemManager.cpp" />
     <ClCompile Include="..\src\manager\TextureManager.cpp" />
     <ClCompile Include="..\src\platform\Platform_Windows.cpp" />
     <ClCompile Include="..\src\rendering\Material.cpp" />
+    <ClCompile Include="..\src\rendering\Mesh.cpp" />
     <ClCompile Include="..\src\rendering\Shader_OpenGL.cpp" />
     <ClCompile Include="..\src\rendering\Texture_OpenGL.cpp" />
     <ClCompile Include="..\src\system\EditorSystem.cpp" />

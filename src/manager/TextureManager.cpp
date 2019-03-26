@@ -12,6 +12,16 @@ namespace GameEngine
 
 	}
 
+	int TextureManager::Initialize()
+	{
+		return 0;
+	}
+
+	int TextureManager::Destroy()
+	{
+		return 0;
+	}
+
 	TexturePtr TextureManager::CreateTexture(const char* textureFilename)
 	{
 		auto itr = m_TextureMap.find(textureFilename);

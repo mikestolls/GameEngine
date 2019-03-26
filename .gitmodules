@@ -16,3 +16,6 @@
 [submodule "submodule/libfreetype2"]
 	path = submodule/libfreetype2
 	url = https://github.com/servo/libfreetype2.git
+[submodule "submodule/assimp"]
+	path = submodule/assimp
+	url = https://github.com/assimp/assimp.git
