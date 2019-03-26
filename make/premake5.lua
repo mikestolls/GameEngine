@@ -61,5 +61,6 @@ solution "GameEngine"
 			"../submodule/rapidjson/include",
 			"../submodule/glm",
 			"../submodule/libfreetype2/freetype2/include",
+			"../submodule/assimp/include",
         }
 		

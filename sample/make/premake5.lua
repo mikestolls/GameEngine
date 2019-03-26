@@ -86,8 +86,8 @@ solution "GameEngineSample"
 	-- Projects
 	project("GameEngineSample")
 		location("../_prj/" .. _ACTION)
-		targetdir "../_build/%{cfg.buildcfg}"
-		debugdir "../_build/%{cfg.buildcfg}"
+		targetdir "../_bin/%{cfg.buildcfg}"
+		debugdir "../_bin/%{cfg.buildcfg}"
 		objdir "../_obj/%{cfg.buildcfg}"
         kind "ConsoleApp"
 		
