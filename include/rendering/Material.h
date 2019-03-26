@@ -22,7 +22,7 @@ namespace GameEngine
 
 		void								SetActive(unsigned int passIndex);
 
-		inline unsigned int					GetNumPasses() { return m_MaterialPasses.size(); }
+		inline unsigned int					GetNumPasses() { return (unsigned int)m_MaterialPasses.size(); }
 		inline ShaderPtr					GetShader(unsigned int passIndex) { return m_MaterialPasses[passIndex].shader; }
 
 	private:

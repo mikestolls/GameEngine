@@ -18,9 +18,9 @@ namespace GameEngine
 
 	protected:
 
-		std::string m_Filename;
+		std::string							m_Filename;
 
-		unsigned int m_TextureId;
+		unsigned int						m_TextureId;
 	};
 
 	typedef std::shared_ptr<ITexture>		TexturePtr;

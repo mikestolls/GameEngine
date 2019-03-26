@@ -1,0 +1,7 @@
+{
+	"vertex_shader" : "material/mesh.vertex.glsl",
+	"fragment_shader" : "material/mesh.fragment.glsl",
+	"shader_defines" : "",
+	"uniforms" : [
+	]
+}

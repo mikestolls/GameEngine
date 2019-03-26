@@ -22,22 +22,41 @@ namespace GameEngine
 		m_ShaderMgr = std::make_shared<ShaderManager>();
 		m_MaterialMgr = std::make_shared<MaterialManager>();
 		m_TextureMgr = std::make_shared<TextureManager>();
+		m_GameObjectMgr = std::make_shared<GameObjectManager>();
+		m_EventMgr = std::make_shared<EventManager>();
 	}
 
 	Engine::~Engine()
 	{
+		// initialize manager
+		m_SystemMgr->Destroy();
+		m_ShaderMgr->Destroy();
+		m_MaterialMgr->Destroy();
+		m_TextureMgr->Destroy();
+		m_GameObjectMgr->Destroy();
+		m_EventMgr->Destroy();
+
 		m_SystemMgr = nullptr;
 		m_ShaderMgr = nullptr;
 		m_MaterialMgr = nullptr;
+		m_TextureMgr = nullptr;
+		m_GameObjectMgr = nullptr;
+		m_EventMgr = nullptr;
 	}
 
 	int Engine::Initialize(DriverPtr driver)
 	{
 		m_Driver = driver;
 
-		// add systems
-		m_SystemMgr->RegisterSystem(std::make_shared<RenderSystem>());
-		m_SystemMgr->RegisterSystem(std::make_shared<EditorSystem>());
+		// initialize manager
+		m_SystemMgr->Initialize();
+		m_ShaderMgr->Initialize();
+		m_MaterialMgr->Initialize();
+		m_TextureMgr->Initialize();
+		m_GameObjectMgr->Initialize();
+		m_EventMgr->Initialize();
+
+		m_EventMgr->RegisterEventListener("Frame_Update", std::bind(&Engine::Update, this, std::placeholders::_1));
 
 		return 0;
 	}
@@ -47,14 +66,11 @@ namespace GameEngine
 		return 0;
 	}
 
-	int Engine::Update(float dt)
+	int Engine::Update(EventArgs& args)
 	{
 		// engine update
-		int ret = m_SystemMgr->Update(dt);
+		m_EventMgr->SendEvent("System_Update");
 
-		// engine render
-		m_SystemMgr->Render();
-
-		return ret;
+		return 0;
 	}
 }

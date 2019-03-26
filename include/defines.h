@@ -6,7 +6,9 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <fstream>
+#include <functional>
 
 // Include GLEW. Always include it before gl.h and glfw.h, since it's a bit magic.
 #include <GL/gl3w.h>

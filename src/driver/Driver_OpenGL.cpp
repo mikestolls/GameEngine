@@ -2,6 +2,9 @@
 
 #include <GL/gl3w.h>
 
+#include <Engine.h>
+#include <manager/EventManager.h>
+
 namespace GameEngine
 {
 	Driver_OpenGL::Driver_OpenGL()
@@ -17,6 +20,10 @@ namespace GameEngine
 
 	int Driver_OpenGL::Initialize()
 	{
+		// setup frame event callback
+		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PreUpdate", std::bind(&Driver_OpenGL::PreUpdate, this));
+		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PostUpdate", std::bind(&Driver_OpenGL::PostUpdate, this));
+
 		return 0;
 	}
 
@@ -25,17 +32,15 @@ namespace GameEngine
 		return 0;
 	}
 
-	int Driver_OpenGL::PreUpdate()
+	void Driver_OpenGL::PreUpdate()
 	{
 		glViewport(m_ViewportRect.a.x, m_ViewportRect.a.y, m_ViewportRect.b.x, m_ViewportRect.b.y);
 		Clear(CLEAR_COLOR | CLEAR_DEPTH | CLEAR_STENCIL);
-
-		return 0;
 	}
 
-	int Driver_OpenGL::PostUpdate()
+	void Driver_OpenGL::PostUpdate()
 	{
-		return 0;
+
 	}
 
 	void Driver_OpenGL::SetClearColor(float r, float g, float b, float a)
