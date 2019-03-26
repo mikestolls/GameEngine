@@ -16,9 +16,6 @@ namespace GameEngine
 		int										Destroy();
 
 		MaterialPtr								CreateMaterial(const char* materialFilename);
-
-	private:
-
 	};
 
 	typedef std::shared_ptr<MaterialManager>	MaterialManagerPtr;

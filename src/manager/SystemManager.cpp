@@ -1,4 +1,6 @@
 #include "manager/SystemManager.h"
+#include "system/RenderSystem.h"
+#include "system/EditorSystem.h"
 
 namespace GameEngine
 {
@@ -12,39 +14,29 @@ namespace GameEngine
 
 	}
 
-	int SystemManager::Update(float dt)
+	int SystemManager::Initialize()
 	{
-		for (SystemPtr system : m_Systems)
-		{
-			bool ret = system->Update(dt);
+		// create and initialize the systems
+		m_Systems.push_back(std::make_shared<RenderSystem>());
+		m_Systems.push_back(std::make_shared<EditorSystem>());
 
-			// a system wants to kill the app
-			if (ret != 0)
-			{
-				return ret;
-			}
+		for (auto itr = m_Systems.begin(); itr != m_Systems.end(); itr++)
+		{
+			(*itr)->Initialize();
 		}
 
 		return 0;
 	}
 
-	int SystemManager::Render()
+	int SystemManager::Destroy()
 	{
-		for (SystemPtr system : m_Systems)
+		for (auto itr = m_Systems.begin(); itr != m_Systems.end(); itr++)
 		{
-			system->Render();
+			(*itr)->Initialize();
 		}
 
+		m_Systems.clear();
+
 		return 0;
-	}
-
-	void SystemManager::RegisterSystem(SystemPtr system)
-	{
-		m_Systems.push_back(system);
-	}
-
-	void SystemManager::UnregisterSystem(SystemPtr system)
-	{
-		//m_Systems.erase(system);
 	}
 }

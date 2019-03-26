@@ -1,8 +1,10 @@
 #include "defines.h"
 #include "platform/Platform_Windows.h"
-#include "Engine.h"
 
 #include "imgui.h"
+
+
+#include "component/MeshComponent.h"
 
 namespace GameEngine
 {
@@ -20,6 +22,7 @@ namespace GameEngine
 		m_WindowName = windowName;
 		m_ScreenWidth = screenWidth;
 		m_ScreenHeight = screenHeight;
+		m_IsRunning = true;
 	}
 
 	Platform_Windows::~Platform_Windows()
@@ -71,6 +74,8 @@ namespace GameEngine
 
 		m_Driver = std::make_shared<Driver_OpenGL>();
 		m_Driver->Initialize();
+		m_Driver->SetViewport(glm::vec2(0.0f, 0.0f), glm::vec2(m_ScreenWidth, m_ScreenHeight));
+
 
 		m_ImguiDriver = std::make_shared<GameEngine::UI::ImguiDriver>();
 		m_ImguiDriver->Initialize((void*)glfwGetWin32Window(window), m_ScreenWidth, m_ScreenHeight, m_Driver);
@@ -96,12 +101,26 @@ namespace GameEngine
 		Engine* engine = Engine::GetInstance();
 		engine->Initialize(m_Driver);
 
+		// init test scene
+		GameObjectPtr obj = std::make_shared<GameObject>();
+		obj->AddComponent(std::make_shared<MeshComponent>());
+
+		engine->GetGameObjectMgr()->AddGameObject(obj);
+		// end of test
+
+		engine->GetEventMgr()->RegisterEventListener("Platform_Shutdown", std::bind(&Platform_Windows::Shutdown, this));
+
 		float deltaTime = 0.0f;
 		float lastFrame = 0.0f;
-		bool shouldKill = false;
 
-		while (!glfwWindowShouldClose(window) && !shouldKill)
+		while (m_IsRunning)
 		{
+			// check for window close
+			if (glfwWindowShouldClose(window))
+			{
+				m_IsRunning = false;
+			}
+
 			// Set frame time
 			float currentFrame = static_cast<float>(glfwGetTime());
 			deltaTime = currentFrame - lastFrame;
@@ -111,14 +130,13 @@ namespace GameEngine
 			glfwPollEvents();
 			UpdateMouse();
 
-			m_Driver->PreUpdate();
-			m_ImguiDriver->PreUpdate(deltaTime);
+			FrameEventArgs args(deltaTime);
 
-			// engine update
-			shouldKill = engine->Update(deltaTime);
+			engine->GetEventMgr()->SendEvent("Frame_PreUpdate", args);
 
-			m_Driver->PostUpdate();
-			m_ImguiDriver->PostUpdate();
+			engine->GetEventMgr()->SendEvent("Frame_Update", args);
+
+			engine->GetEventMgr()->SendEvent("Frame_PostUpdate", args);
 
 			// Swap buffers
 			glfwMakeContextCurrent(window);
@@ -129,6 +147,11 @@ namespace GameEngine
 		Destroy();
 
 		return 0;
+	}
+
+	void Platform_Windows::Shutdown()
+	{
+		m_IsRunning = false;
 	}
 
 	int Platform_Windows::UpdateMouse()
