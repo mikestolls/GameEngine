@@ -29,7 +29,6 @@ function ref_project(name, loc, debug, release)
 	local prjPath = path.join(loc, name)
 	local absLoc = path.join(workspace().location, loc)
 	
-	print(string.format("Proj File: %s", prjPath))
 	local prjuuid = getExistingUUID(prjPath)
 
 	if isVisualStudio() then
@@ -60,7 +59,7 @@ rootdir = path.join(path.getdirectory(_SCRIPT), "..")
 solution "GameEngineSample"
 	language "C++"
 	system "Windows"
-	architecture "x64"
+	architecture "x86"
 	configurations { "Debug", "Release" }
 	location("../_prj/" .. _ACTION)
     characterset "MBCS"
@@ -100,17 +99,23 @@ solution "GameEngineSample"
             "../src/**.h",
 			"../src/**.cpp",
 		}
+		
         includedirs {
             "../src",
 			"../../include",
         }
+		
         links {
+			"legacy_stdio_definitions.lib",
             "opengl32.lib",
             "winmm.lib",
 			"glfw3.lib",
 			"GameEngine.lib",
 			"assimp-vc140-mt.lib"
         }
+		
+		dependson { "GameEngine" }
+		
         defines {
 		
         }
@@ -143,4 +148,4 @@ solution "GameEngineSample"
 			
 	-- dependencies
 	ref_project("GameEngine", "../../../_prj/" .. _ACTION, "Debug", "Release")
-			
+	

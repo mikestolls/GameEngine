@@ -6,13 +6,13 @@ rootdir = path.join(path.getdirectory(_SCRIPT), "..")
 solution "GameEngine"
 	language "C++"
 	system "Windows"
-	architecture "x64"
+	architecture "x86"
 	configurations { "Debug", "Release" }
 	location("../_prj/" .. _ACTION)
     debugdir "../_bin/%{cfg.buildcfg}"
 	targetdir "../_bin/%{cfg.buildcfg}"
 	objdir "../_obj/%{cfg.buildcfg}/%{prj.name}"
-	kind "ConsoleApp"
+	kind "StaticLib"
     characterset "MBCS"
 
 	defines {
@@ -44,15 +44,11 @@ solution "GameEngine"
 		files {
             "../src/**.h",
 			"../src/**.cpp",
-			"../submodule/imgui/**.h",
-			"../submodule/imgui/**.cpp",
+			"../submodule/imgui/*.h",
+			"../submodule/imgui/*.cpp",
 			"../submodule/imgui/misc/freetype/**.h",
 			"../submodule/imgui/misc/freetype/**.cpp",
-		}
-		
-		removefiles { 
-			"../submodule/imgui/examples/**.cpp", 
-			"../submodule/imgui/examples/**.h",
+			"../submodule/imgui/examples/libs/gl3w/GL/*.c",
 		}
 		
         includedirs {
