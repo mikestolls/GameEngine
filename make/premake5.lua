@@ -22,7 +22,7 @@ solution "GameEngine"
     --linkoptions "/opt:ref"
     editandcontinue "on"
 
-    rtti "off"
+    rtti "on"
     exceptionhandling "off"
 	
 	configuration "Debug*"
