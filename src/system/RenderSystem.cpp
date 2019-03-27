@@ -23,8 +23,8 @@ namespace GameEngine
 		engine->GetDriver()->SetClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
 		engine->GetEventMgr()->RegisterEventListener("System_Update", std::bind(&RenderSystem::Update, this, std::placeholders::_1));
-		engine->GetEventMgr()->RegisterEventListener("GameObject_Add", std::bind(&RenderSystem::GameObjectAdd, this, std::placeholders::_1));
-		engine->GetEventMgr()->RegisterEventListener("GameObject_Remove", std::bind(&RenderSystem::GameObjectRemove, this, std::placeholders::_1));
+		engine->GetEventMgr()->RegisterEventListener("GameObject_Add", std::bind(&RenderSystem::GameObjectAddCallback, this, std::placeholders::_1));
+		engine->GetEventMgr()->RegisterEventListener("GameObject_Remove", std::bind(&RenderSystem::GameObjectRemoveCallback, this, std::placeholders::_1));
 
 		return 0;
 	}
@@ -39,21 +39,56 @@ namespace GameEngine
 		Engine::GetInstance()->GetDriver()->Clear(IDriver::CLEAR_COLOR);
 
 		// attempt to draw test mesh
-		for (auto itr = m_GameObjects.begin(); itr != m_GameObjects.end(); itr++)
+		for (auto itr = m_GameObjects.begin(); itr != m_GameObjects.end(); )
 		{
-			(*itr)->GetComponent<MeshComponent>()->GetMesh()->Render();
+			GameObjectPtr obj = (*itr).lock();
+
+			if (obj)
+			{
+				obj->GetComponent<MeshComponent>()->GetMesh()->Render();
+			}
+			else
+			{
+				// expired
+				itr = m_GameObjects.erase(itr);
+				continue;
+			}
+
+			itr++; // we move iterator here to account for erase
 		}
 	}
 
-	void RenderSystem::GameObjectAdd(EventArgs& args)
+	void RenderSystem::AddGameObject(GameObjectWeakPtr gameObj)
 	{
-		GameObjectEventArgs* gameObjArgs = static_cast<GameObjectEventArgs*>(&args);
-
-		m_GameObjects.push_back(gameObjArgs->gameObj);
+		m_GameObjects.push_front(gameObj);
 	}
 
-	void RenderSystem::GameObjectRemove(EventArgs& args)
+	void RenderSystem::GameObjectAddCallback(EventArgs& args)
 	{
 		GameObjectEventArgs* gameObjArgs = static_cast<GameObjectEventArgs*>(&args);
+		GameObjectPtr obj = gameObjArgs->gameObj.lock();
+
+		if (obj) // check it hasnt expired
+		{
+			AddGameObject(obj);
+		}
+	}
+
+	void RenderSystem::GameObjectRemoveCallback(EventArgs& args)
+	{
+		GameObjectEventArgs* gameObjArgs = static_cast<GameObjectEventArgs*>(&args);
+		GameObjectPtr obj = gameObjArgs->gameObj.lock();
+
+		if (obj) // check it hasnt expired. if it has it will be removed during update
+		{
+			for (auto itr = m_GameObjects.begin(); itr != m_GameObjects.end(); itr++)
+			{
+				if ((*itr).lock() == obj)
+				{
+					itr = m_GameObjects.erase(itr);
+					return;
+				}
+			}
+		}
 	}
 }

@@ -16,6 +16,6 @@ namespace GameEngine
 	{
 		GameObjectEventArgs(GameObjectPtr obj) : EventArgs() { gameObj = obj; }
 
-		GameObjectPtr gameObj;
+		GameObjectWeakPtr gameObj;
 	};
 }

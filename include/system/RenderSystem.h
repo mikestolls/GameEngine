@@ -8,19 +8,21 @@ namespace GameEngine
 	class RenderSystem : public ISystem
 	{
 	public:
-									RenderSystem();
-									~RenderSystem();
+											RenderSystem();
+											~RenderSystem();
 																	   
-		int							Initialize();
-		int							Destroy();
+		int									Initialize();
+		int									Destroy();
 
 	private:
 
-		void						Update(EventArgs& args);
+		void								Update(EventArgs& args);
 
-		void						GameObjectAdd(EventArgs& args);
-		void						GameObjectRemove(EventArgs& args);
+		void								AddGameObject(GameObjectWeakPtr gameObj);
+
+		void								GameObjectAddCallback(EventArgs& args);
+		void								GameObjectRemoveCallback(EventArgs& args);
 		
-		std::vector<GameObjectPtr>	m_GameObjects;
+		std::list<GameObjectWeakPtr>		m_GameObjects;
 	};
 }

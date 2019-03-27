@@ -17,9 +17,11 @@ namespace GameEngine
 	};
 
 	typedef std::shared_ptr<IComponent>				IComponentPtr;
+	typedef std::weak_ptr<IComponent>				IComponentWeakPtr;
 
 	class GameObject;
 	typedef std::shared_ptr<GameObject>				GameObjectPtr;
+	typedef std::weak_ptr<GameObject>				GameObjectWeakPtr;
 
 	class GameObject
 	{
