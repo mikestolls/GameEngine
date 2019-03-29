@@ -39,17 +39,8 @@ namespace GameEngine
 		m_Scene = NULL;
 	}
 
-	void Mesh::Render()
-	{
-		// calculate model matrix. all this is test for now
-		glm::mat4 rotation = glm::mat4(1.0f);
-		glm::mat4 translation = glm::translate(glm::vec3());
-		glm::mat4 scale = glm::mat4(1.0f);
-
-		glm::mat4 modelMat = translation * rotation * scale;
-		glm::mat4 projMat = glm::perspective(1.3333f, glm::radians(45.0f), 0.1f, 2000.0f);
-		glm::mat4 viewMat = glm::lookAt(glm::vec3(0.0f, 0.0f, 100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		
+	void Mesh::Render(glm::mat4 modelMat, glm::mat4 viewMat, glm::mat4 projMat)
+	{		
 		glBindVertexArray(m_VertexArrayID);
 
 		for (unsigned int i = 0; i < m_Material->GetNumPasses(); i++)

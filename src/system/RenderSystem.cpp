@@ -3,6 +3,7 @@
 
 #include "rendering/Mesh.h"
 #include "component/MeshComponent.h"
+#include "component/TransformComponent.h"
 
 namespace GameEngine
 {
@@ -38,6 +39,10 @@ namespace GameEngine
 	{
 		Engine::GetInstance()->GetDriver()->Clear(IDriver::CLEAR_COLOR);
 
+		// pre calc the view and proj matrix
+		glm::mat4 projMat = glm::perspective(1.3333f, glm::radians(45.0f), 0.1f, 2000.0f);
+		glm::mat4 viewMat = glm::lookAt(glm::vec3(0.0f, 0.0f, 100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
 		// attempt to draw test mesh
 		for (auto itr = m_GameObjects.begin(); itr != m_GameObjects.end(); )
 		{
@@ -45,7 +50,16 @@ namespace GameEngine
 
 			if (obj)
 			{
-				obj->GetComponent<MeshComponent>()->GetMesh()->Render();
+				// calculate model matrix
+				TransformComponent* trans = obj->GetComponent<TransformComponent>();
+
+				glm::mat4 rotation = glm::mat4(trans->GetRotation());
+				glm::mat4 translation = glm::translate(trans->GetPosition());
+				glm::mat4 scale = glm::scale(trans->GetScale());
+
+				glm::mat4 modelMat = translation * rotation * scale;
+
+				obj->GetComponent<MeshComponent>()->GetMesh()->Render(modelMat, viewMat, projMat);
 			}
 			else
 			{

@@ -5,6 +5,7 @@
 
 
 #include "component/MeshComponent.h"
+#include "component/TransformComponent.h"
 
 namespace GameEngine
 {
@@ -103,6 +104,7 @@ namespace GameEngine
 
 		// init test scene
 		GameObjectPtr obj = std::make_shared<GameObject>();
+		obj->AddComponent(std::make_shared<TransformComponent>());
 		obj->AddComponent(std::make_shared<MeshComponent>());
 
 		engine->GetGameObjectMgr()->AddGameObject(obj);
