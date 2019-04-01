@@ -16,10 +16,12 @@ namespace GameEngine
 		std::string									m_Name;
 	};
 
-	typedef std::shared_ptr<IComponent>				IComponentPtr;
+	typedef std::unique_ptr<IComponent>				IComponentPtr;
+	typedef std::weak_ptr<IComponent>				IComponentWeakPtr;
 
 	class GameObject;
 	typedef std::shared_ptr<GameObject>				GameObjectPtr;
+	typedef std::weak_ptr<GameObject>				GameObjectWeakPtr;
 
 	class GameObject
 	{
@@ -31,7 +33,7 @@ namespace GameEngine
 		int											AddComponent(IComponentPtr component);
 
 		template <typename T>
-		T*											GetComponent()
+		T*									GetComponent()
 		{
 			for (auto itr = m_Components.begin(); itr != m_Components.end(); itr++)
 			{

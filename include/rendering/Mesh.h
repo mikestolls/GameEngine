@@ -14,7 +14,7 @@ namespace GameEngine
 											Mesh(const char* meshFilename);
 											~Mesh();
 											
-		void								Render();
+		void								Render(glm::mat4 modelMat, glm::mat4 viewMat, glm::mat4 projMat);
 
 	private:
 

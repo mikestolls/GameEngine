@@ -22,7 +22,7 @@ namespace GameEngine
 
 	int GameObject::AddComponent(IComponentPtr component)
 	{
-		m_Components.push_back(component);
+		m_Components.push_back(std::move(component));
 
 		return 0;
 	}

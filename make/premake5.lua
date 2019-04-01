@@ -42,7 +42,8 @@ solution "GameEngine"
 		}
 			
 		files {
-            "../src/**.h",
+            "../data/**",
+            "../include/**.h",
 			"../src/**.cpp",
 			"../submodule/imgui/*.h",
 			"../submodule/imgui/*.cpp",

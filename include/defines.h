@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <forward_list>
 #include <unordered_map>
 #include <fstream>
 #include <functional>
@@ -22,6 +23,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 namespace GameEngine
 {
