@@ -25,9 +25,12 @@ namespace GameEngine
 			ImGui::CreateContext();
 
 			ImGuiIO& io = ImGui::GetIO();
-			io.ImeWindowHandle = handle;
 			io.DisplaySize = ImVec2((float)screenWidth, (float)screenHeight);
 			io.DisplayFramebufferScale = ImVec2(screenWidth > 0 ? ((float)screenWidth / screenWidth) : 0, screenHeight > 0 ? ((float)screenHeight / screenHeight) : 0);
+
+			//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
+			io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+			io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 
 			// Setup Dear ImGui style
 			ImGui::StyleColorsClassic();

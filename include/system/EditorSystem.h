@@ -18,6 +18,8 @@ namespace GameEngine
 
 		void						Update();
 
+		void						UpdateHierarchyPanel();
+
 		void						GameObjectAddCallback(EventArgs& args);
 
 		GameObjectPtr				m_Camera;

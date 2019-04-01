@@ -91,6 +91,22 @@ namespace GameEngine
 			m_Camera->GetComponent<CameraComponent>()->SetFov(camera_fov);
 		}
 		// end test
+
+		UpdateHierarchyPanel();
+	}
+
+	void EditorSystem::UpdateHierarchyPanel()
+	{
+		// panel for heirarchy view
+		if (ImGui::Begin("Hierarchy"))
+		{
+			if (ImGui::TreeNode("TEST"))
+			{
+				ImGui::TreePop();
+			}
+
+			ImGui::End();
+		}
 	}
 
 	void EditorSystem::GameObjectAddCallback(EventArgs& args)

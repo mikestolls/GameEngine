@@ -33,7 +33,7 @@ namespace GameEngine
 		int											AddComponent(IComponentPtr component);
 
 		template <typename T>
-		T*									GetComponent()
+		T*											GetComponent()
 		{
 			for (auto itr = m_Components.begin(); itr != m_Components.end(); itr++)
 			{
@@ -62,6 +62,8 @@ namespace GameEngine
 
 		int											Initialize();
 		int											Destroy();
+
+		inline GameObjectPtr						GetRootGameObj() { return m_RootGameObj; }
 
 		int											AddGameObject(GameObjectPtr obj);
 		int											AddGameObject(GameObjectPtr obj, GameObjectPtr parent);
