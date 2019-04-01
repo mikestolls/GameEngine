@@ -5,6 +5,7 @@
 
 
 #include "component/MeshComponent.h"
+#include "component/CameraComponent.h"
 #include "component/TransformComponent.h"
 
 namespace GameEngine
@@ -104,10 +105,20 @@ namespace GameEngine
 
 		// init test scene
 		GameObjectPtr obj = std::make_shared<GameObject>();
-		obj->AddComponent(std::make_shared<TransformComponent>());
-		obj->AddComponent(std::make_shared<MeshComponent>());
+		obj->AddComponent(std::make_unique<TransformComponent>());
+		obj->AddComponent(std::make_unique<MeshComponent>());
 
 		engine->GetGameObjectMgr()->AddGameObject(obj);
+
+		// cam
+		GameObjectPtr camObj = std::make_shared<GameObject>();
+		camObj->AddComponent(std::make_unique<TransformComponent>());
+		camObj->AddComponent(std::make_unique<CameraComponent>());
+
+		TransformComponent* comp = camObj->GetComponent<TransformComponent>();
+		comp->SetPosition(0.0f, 0.0f, 100.0f);
+
+		engine->GetGameObjectMgr()->AddGameObject(camObj);
 		// end of test
 
 		engine->GetEventMgr()->RegisterEventListener("Platform_Shutdown", std::bind(&Platform_Windows::Shutdown, this));
