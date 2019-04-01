@@ -16,7 +16,7 @@ namespace GameEngine
 											CameraComponent();
 											~CameraComponent();
 
-		void								SetFov(float fov) { m_Fov = fov; }
+		void								SetFov(float fov) { m_Fov = glm::radians(fov); }
 		float								GetFov() { return m_Fov; }
 
 		void								SetAspect(float aspect) { m_Aspect = aspect; }

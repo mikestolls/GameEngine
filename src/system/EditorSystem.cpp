@@ -8,6 +8,7 @@
 namespace GameEngine
 {
 	float camera_rot[] = { 0.0f, 0.0f, 0.0f };
+	float camera_fov = 100.0f;
 	bool show_demo_window = true;
 	bool show_another_window = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
@@ -73,6 +74,7 @@ namespace GameEngine
 		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 		ImGui::Checkbox("Another Window", &show_another_window);
 
+		ImGui::SliderFloat("fov", &camera_fov, 1.0f, 360.0f);
 		ImGui::SliderFloat3("camera rot", camera_rot, 0.0f, 360.f);            // Edit 1 float using a slider from 0.0f to 1.0f
 		ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
 
@@ -83,6 +85,7 @@ namespace GameEngine
 		if (m_Camera)
 		{
 			m_Camera->GetComponent<TransformComponent>()->SetRotation(camera_rot[0], camera_rot[1], camera_rot[2]);
+			m_Camera->GetComponent<CameraComponent>()->SetFov(camera_fov);
 		}
 		// end test
 	}
