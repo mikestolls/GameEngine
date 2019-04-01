@@ -23,6 +23,7 @@ namespace GameEngine
 		void								GameObjectAddCallback(EventArgs& args);
 		void								GameObjectRemoveCallback(EventArgs& args);
 		
-		std::list<GameObjectWeakPtr>		m_GameObjects;
+		std::list<GameObjectWeakPtr>		m_MeshGameObjects;
+		std::list<GameObjectWeakPtr>		m_CameraGameObjects;
 	};
 }

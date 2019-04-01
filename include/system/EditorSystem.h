@@ -1,5 +1,7 @@
 #pragma once
 #include "manager/SystemManager.h"
+#include "manager/EventManager.h"
+#include "manager/GameObjectManager.h"
 
 namespace GameEngine
 {
@@ -15,5 +17,9 @@ namespace GameEngine
 	private:
 
 		void						Update();
+
+		void						GameObjectAddCallback(EventArgs& args);
+
+		GameObjectPtr				m_Camera;
 	};
 }
