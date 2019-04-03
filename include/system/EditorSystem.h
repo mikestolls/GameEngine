@@ -18,7 +18,9 @@ namespace GameEngine
 
 		void						Update();
 
+		void						UpdateMainMenuBar();
 		void						UpdateHierarchyPanel();
+		void						UpdateInspectorPanel();
 
 		void						GameObjectAddCallback(EventArgs& args);
 

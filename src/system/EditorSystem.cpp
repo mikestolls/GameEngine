@@ -38,9 +38,65 @@ namespace GameEngine
 	}
 
 	void EditorSystem::Update()
-	{
-		int ret = 0;
+	{	
+		// start test
+		/*ImGui::Begin("Hello, world!");
 
+		ImGui::SetWindowSize(ImVec2(300, 150));
+
+		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+		ImGui::Checkbox("Another Window", &show_another_window);
+
+		ImGui::SliderFloat("fov", &camera_fov, 1.0f, 360.0f);
+		ImGui::SliderFloat3("camera rot", camera_rot, 0.0f, 360.f);            // Edit 1 float using a slider from 0.0f to 1.0f
+		ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+
+		ImGui::End();
+
+		Engine::GetInstance()->GetDriver()->SetClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+
+		if (m_Camera)
+		{
+			m_Camera->GetComponent<TransformComponent>()->SetRotation(camera_rot[0], camera_rot[1], camera_rot[2]);
+			m_Camera->GetComponent<CameraComponent>()->SetFov(camera_fov);
+		}*/
+		// end test
+
+		ImGuiWindowFlags windowFlags = 0;
+		windowFlags |= ImGuiWindowFlags_NoTitleBar;
+		windowFlags |= ImGuiWindowFlags_NoScrollbar;
+		windowFlags |= ImGuiWindowFlags_MenuBar;
+		windowFlags |= ImGuiWindowFlags_NoMove;
+		windowFlags |= ImGuiWindowFlags_NoResize;
+		windowFlags |= ImGuiWindowFlags_NoCollapse;
+		windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
+		
+		ImVec2 main_viewport_pos = ImGui::GetMainViewport()->Pos;
+		ImVec2 main_viewport_size = ImGui::GetMainViewport()->Size;
+		ImGui::SetNextWindowPos(ImVec2(main_viewport_pos.x, main_viewport_pos.y));
+		ImGui::SetNextWindowSize(ImVec2(main_viewport_size.x, main_viewport_size.y));
+
+		if (ImGui::Begin("Main", 0, windowFlags))
+		{
+			// docking configs
+			static ImGuiDockNodeFlags dockspaceFlags = 0;
+
+			ImGuiID dockspaceId = ImGui::GetID("DockSpace");
+			ImGui::DockSpace(dockspaceId, ImVec2(0.0f, 0.0f), dockspaceFlags);
+
+			// setup the main imgui window
+			UpdateMainMenuBar();
+
+			// update each menu
+			UpdateHierarchyPanel();
+
+			ImGui::End();
+		}
+	}
+
+	void EditorSystem::UpdateMainMenuBar()
+	{
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
@@ -67,38 +123,37 @@ namespace GameEngine
 
 			ImGui::EndMainMenuBar();
 		}
-		
-		// start test
-		ImGui::Begin("Hello, world!");
-
-		ImGui::SetWindowSize(ImVec2(300, 150));
-
-		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-		ImGui::Checkbox("Another Window", &show_another_window);
-
-		ImGui::SliderFloat("fov", &camera_fov, 1.0f, 360.0f);
-		ImGui::SliderFloat3("camera rot", camera_rot, 0.0f, 360.f);            // Edit 1 float using a slider from 0.0f to 1.0f
-		ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-		ImGui::End();
-
-		Engine::GetInstance()->GetDriver()->SetClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-
-		if (m_Camera)
-		{
-			m_Camera->GetComponent<TransformComponent>()->SetRotation(camera_rot[0], camera_rot[1], camera_rot[2]);
-			m_Camera->GetComponent<CameraComponent>()->SetFov(camera_fov);
-		}
-		// end test
-
-		UpdateHierarchyPanel();
 	}
 
 	void EditorSystem::UpdateHierarchyPanel()
 	{
 		// panel for heirarchy view
-		if (ImGui::Begin("Hierarchy"))
+
+		ImGuiWindowFlags window_flags = 0;
+		//window_flags |= ImGuiWindowFlags_NoMove;
+		//window_flags |= ImGuiWindowFlags_NoResize;
+		//window_flags |= ImGuiWindowFlags_NoCollapse;
+		//window_flags |= ImGuiWindowFlags_NoDocking;
+
+		if (ImGui::Begin("Hierarchy", 0, window_flags))
+		{
+			if (ImGui::TreeNode("TEST"))
+			{
+				ImGui::TreePop();
+			}
+
+			ImGui::End();
+		}
+	}
+
+	void EditorSystem::UpdateInspectorPanel()
+	{
+		// panel for heirarchy view
+
+		ImGuiWindowFlags window_flags = 0;
+		//window_flags |= ImGuiWindowFlags_NoDocking;
+
+		if (ImGui::Begin("Inspector", 0, window_flags))
 		{
 			if (ImGui::TreeNode("TEST"))
 			{
