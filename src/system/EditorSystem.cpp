@@ -137,9 +137,9 @@ namespace GameEngine
 
 		if (ImGui::Begin("Hierarchy", 0, window_flags))
 		{
-			if (ImGui::TreeNode("TEST"))
+			for (GameObjectWeakPtr child : Engine::GetInstance()->GetGameObjectMgr()->GetRootGameObj()->GetChildren())
 			{
-				ImGui::TreePop();
+				UpdateHierarchyTreeRecursive(child);
 			}
 
 			ImGui::End();
@@ -180,4 +180,30 @@ namespace GameEngine
 		}
 	}
 
+	void EditorSystem::UpdateHierarchyTreeRecursive(GameObjectWeakPtr obj)
+	{
+		GameObjectPtr gameObj = obj.lock();
+
+		// if gameobject has expired. we dont care here. let another system deal with that
+		if (gameObj != nullptr)
+		{
+			if (gameObj->GetChildren().size() > 0)
+			{
+				if (ImGui::TreeNode(gameObj->GetName().c_str()))
+				{
+					for (GameObjectWeakPtr child : gameObj->GetChildren())
+					{
+						UpdateHierarchyTreeRecursive(child);
+					}
+
+					ImGui::TreePop();
+				}
+			}
+			else
+			{
+				bool selected = false;
+				ImGui::Selectable(gameObj->GetName().c_str(), selected);
+			}
+		}
+	}
 }

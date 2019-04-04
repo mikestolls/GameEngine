@@ -23,14 +23,21 @@ namespace GameEngine
 	typedef std::shared_ptr<GameObject>				GameObjectPtr;
 	typedef std::weak_ptr<GameObject>				GameObjectWeakPtr;
 
-	class GameObject
+	class GameObject : public std::enable_shared_from_this<GameObject>
 	{
+		friend class GameObjectManager;
+
 	public:
 													GameObject();
 													~GameObject();
 
 		int											AddChild(GameObjectPtr obj);
 		int											AddComponent(IComponentPtr component);
+
+		inline void									SetName(std::string name) { m_Name = name; }
+		inline std::string							GetName() { return m_Name; }
+
+		inline std::vector<GameObjectWeakPtr>&		GetChildren() { return m_Children; }
 
 		template <typename T>
 		T*											GetComponent()
@@ -50,7 +57,11 @@ namespace GameEngine
 
 	private:
 
-		std::vector<GameObjectPtr>					m_Children;
+		std::string									m_Name;
+
+		GameObjectWeakPtr							m_Parent;
+		std::vector<GameObjectWeakPtr>				m_Children;
+
 		std::vector<IComponentPtr>					m_Components;
 	};
 

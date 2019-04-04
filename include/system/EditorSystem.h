@@ -22,6 +22,8 @@ namespace GameEngine
 		void						UpdateHierarchyPanel();
 		void						UpdateInspectorPanel();
 
+		void						UpdateHierarchyTreeRecursive(GameObjectWeakPtr obj);
+
 		void						GameObjectAddCallback(EventArgs& args);
 
 		GameObjectPtr				m_Camera;

@@ -107,13 +107,22 @@ namespace GameEngine
 		GameObjectPtr obj = std::make_shared<GameObject>();
 		obj->AddComponent(std::make_unique<TransformComponent>());
 		obj->AddComponent(std::make_unique<MeshComponent>());
+		obj->SetName("Test OBJ");
 
 		engine->GetGameObjectMgr()->AddGameObject(obj);
+
+		GameObjectPtr obj2 = std::make_shared<GameObject>();
+		obj2->AddComponent(std::make_unique<TransformComponent>());
+		obj2->AddComponent(std::make_unique<MeshComponent>());
+		obj2->SetName("Test OBJ child");
+
+		obj->AddChild(obj2);
 
 		// cam
 		GameObjectPtr camObj = std::make_shared<GameObject>();
 		camObj->AddComponent(std::make_unique<TransformComponent>());
 		camObj->AddComponent(std::make_unique<CameraComponent>());
+		camObj->SetName("MainCamera");
 
 		TransformComponent* comp = camObj->GetComponent<TransformComponent>();
 		comp->SetPosition(0.0f, 0.0f, 100.0f);
