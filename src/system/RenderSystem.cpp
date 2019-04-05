@@ -144,7 +144,7 @@ namespace GameEngine
 			{
 				if ((*itr).lock() == obj)
 				{
-					itr = m_MeshGameObjects.erase(itr);
+					m_MeshGameObjects.erase(itr);
 					return;
 				}
 			}

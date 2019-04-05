@@ -40,6 +40,8 @@ namespace GameEngine
 	int GameObjectManager::Initialize()
 	{
 		m_RootGameObj = std::make_shared<GameObject>();
+		m_RootGameObj->SetName("Root");
+
 		return 0;
 	}
 
@@ -59,7 +61,14 @@ namespace GameEngine
 		if (parentObj)
 		{
 			// valid parent
-			//parentObj->m_Children.remove(obj); // remove child
+			for (auto itr = parentObj->m_Children.begin(); itr != parentObj->m_Children.end(); itr++)
+			{
+				if ((*itr).lock() == obj)
+				{
+					parentObj->m_Children.erase(itr);
+					break;
+				}
+			}
 
 			obj->m_Parent = parent;
 			parent->m_Children.push_back(obj);

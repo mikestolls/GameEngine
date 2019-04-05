@@ -116,6 +116,8 @@ namespace GameEngine
 		obj2->AddComponent(std::make_unique<MeshComponent>());
 		obj2->SetName("Test OBJ child");
 
+		engine->GetGameObjectMgr()->AddGameObject(obj2);
+
 		obj->AddChild(obj2);
 
 		// cam
