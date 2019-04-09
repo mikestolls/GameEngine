@@ -309,7 +309,7 @@ namespace GameEngine
 		{
 			std::vector<char> infoMsg(logLength + 1);
 			glGetShaderInfoLog(vertShaderId, logLength, NULL, &infoMsg[0]);
-			printf("%s\n", &infoMsg[0]);
+			printf("Shader Error: %s\n", &infoMsg[0]);
 		}
 
 		// Compile Fragment Shader_OpenGL
@@ -324,11 +324,11 @@ namespace GameEngine
 		{
 			std::vector<char> infoMsg(logLength + 1);
 			glGetShaderInfoLog(fragShaderId, logLength, NULL, &infoMsg[0]);
-			printf("%s\n", &infoMsg[0]);
+			printf("Shader Error: %s\n", &infoMsg[0]);
 		}
 
 		// Link the program
-		printf("Linking program\n");
+		//printf("Linking program\n");
 		m_ProgramId = glCreateProgram();
 		glAttachShader(m_ProgramId, vertShaderId);
 		glAttachShader(m_ProgramId, fragShaderId);
@@ -341,7 +341,7 @@ namespace GameEngine
 		{
 			std::vector<char> infoMsg(logLength + 1);
 			glGetProgramInfoLog(m_ProgramId, logLength, NULL, &infoMsg[0]);
-			printf("%s\n", &infoMsg[0]);
+			printf("Shader Error: %s\n", &infoMsg[0]);
 		}
 
 		glDetachShader(m_ProgramId, vertShaderId);

@@ -90,6 +90,8 @@ namespace GameEngine
 
 			// update each menu
 			UpdateHierarchyPanel();
+			UpdateInspectorPanel();
+			UpdateScenePanel();
 
 			ImGui::End();
 		}
@@ -155,10 +157,21 @@ namespace GameEngine
 
 		if (ImGui::Begin("Inspector", 0, window_flags))
 		{
-			if (ImGui::TreeNode("TEST"))
-			{
-				ImGui::TreePop();
-			}
+
+			ImGui::End();
+		}
+	}
+
+
+	void EditorSystem::UpdateScenePanel()
+	{
+		// panel for scene view
+
+		ImGuiWindowFlags window_flags = 0;
+		//window_flags |= ImGuiWindowFlags_NoDocking;
+
+		if (ImGui::Begin("Scene", 0, window_flags))
+		{
 
 			ImGui::End();
 		}

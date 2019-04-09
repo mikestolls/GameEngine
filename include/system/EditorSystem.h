@@ -21,6 +21,7 @@ namespace GameEngine
 		void						UpdateMainMenuBar();
 		void						UpdateHierarchyPanel();
 		void						UpdateInspectorPanel();
+		void						UpdateScenePanel();
 
 		void						UpdateHierarchyTreeRecursive(GameObjectWeakPtr obj);
 
