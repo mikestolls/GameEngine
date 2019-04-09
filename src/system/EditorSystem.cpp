@@ -74,8 +74,8 @@ namespace GameEngine
 		
 		ImVec2 main_viewport_pos = ImGui::GetMainViewport()->Pos;
 		ImVec2 main_viewport_size = ImGui::GetMainViewport()->Size;
-		ImGui::SetNextWindowPos(ImVec2(main_viewport_pos.x, main_viewport_pos.y));
-		ImGui::SetNextWindowSize(ImVec2(main_viewport_size.x, main_viewport_size.y));
+		//ImGui::SetNextWindowPos(ImVec2(main_viewport_pos.x, main_viewport_pos.y));
+		//ImGui::SetNextWindowSize(ImVec2(main_viewport_size.x, main_viewport_size.y));
 
 		if (ImGui::Begin("Main", 0, windowFlags))
 		{
@@ -132,10 +132,6 @@ namespace GameEngine
 		// panel for heirarchy view
 
 		ImGuiWindowFlags window_flags = 0;
-		//window_flags |= ImGuiWindowFlags_NoMove;
-		//window_flags |= ImGuiWindowFlags_NoResize;
-		//window_flags |= ImGuiWindowFlags_NoCollapse;
-		//window_flags |= ImGuiWindowFlags_NoDocking;
 
 		if (ImGui::Begin("Hierarchy", 0, window_flags))
 		{
@@ -153,7 +149,6 @@ namespace GameEngine
 		// panel for heirarchy view
 
 		ImGuiWindowFlags window_flags = 0;
-		//window_flags |= ImGuiWindowFlags_NoDocking;
 
 		if (ImGui::Begin("Inspector", 0, window_flags))
 		{
@@ -168,10 +163,19 @@ namespace GameEngine
 		// panel for scene view
 
 		ImGuiWindowFlags window_flags = 0;
-		//window_flags |= ImGuiWindowFlags_NoDocking;
+		window_flags |= ImGuiWindowFlags_NoScrollbar;
 
 		if (ImGui::Begin("Scene", 0, window_flags))
 		{
+			ImGuiIO& io = ImGui::GetIO();
+
+			ImTextureID my_tex_id = io.Fonts->TexID;
+			ImVec2 size = ImGui::GetContentRegionMax();
+			size.x -= (ImGui::GetStyle().FramePadding.x * 2.0f + ImGui::GetStyle().FrameBorderSize * 2);
+			size.y -= (ImGui::GetFrameHeightWithSpacing() + ImGui::GetStyle().FrameBorderSize * 2);
+
+			// draw a texture of the scene
+			ImGui::Image(my_tex_id, size, ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
 
 			ImGui::End();
 		}
