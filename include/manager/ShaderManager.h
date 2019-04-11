@@ -19,7 +19,7 @@ namespace GameEngine
 
 	private:
 
-		std::map<std::string, ShaderPtr>	m_ShaderMap;
+		std::map<std::string, ShaderPtr>	m_ShaderMap; // note: we don't delete shaders yet
 	};
 
 	typedef std::shared_ptr<ShaderManager>	ShaderManagerPtr;
