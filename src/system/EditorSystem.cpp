@@ -26,19 +26,28 @@ namespace GameEngine
 	int EditorSystem::Initialize()
 	{
 		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("System_Update", std::bind(&EditorSystem::Update, this));
+		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PreUpdate", std::bind(&EditorSystem::PreUpdate, this));
+		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PostUpdate", std::bind(&EditorSystem::PostUpdate, this));
 
 		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("GameObject_Add", std::bind(&EditorSystem::GameObjectAddCallback, this, std::placeholders::_1));
+
+		m_SceneFrameBuffer = std::make_shared<FrameBuffer_OpenGL>(1024, 1024, IFrameBuffer::FRAMEBUFFER_COLORTEXTURE0 | IFrameBuffer::FRAMEBUFFER_DEPTHBUFFER);
 
 		return 0;
 	}
 
 	int EditorSystem::Destroy()
 	{
+		m_SceneFrameBuffer = nullptr;
+
 		return 0;
 	}
 
 	void EditorSystem::Update()
-	{	
+	{
+		// pop frame buffer
+		m_SceneFrameBuffer->Pop();
+
 		// start test
 		/*ImGui::Begin("Hello, world!");
 
@@ -71,7 +80,7 @@ namespace GameEngine
 		windowFlags |= ImGuiWindowFlags_NoResize;
 		windowFlags |= ImGuiWindowFlags_NoCollapse;
 		windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
-		
+
 		ImVec2 main_viewport_pos = ImGui::GetMainViewport()->Pos;
 		ImVec2 main_viewport_size = ImGui::GetMainViewport()->Size;
 		//ImGui::SetNextWindowPos(ImVec2(main_viewport_pos.x, main_viewport_pos.y));
@@ -95,6 +104,15 @@ namespace GameEngine
 
 			ImGui::End();
 		}
+	}
+	void EditorSystem::PreUpdate()
+	{
+		m_SceneFrameBuffer->Push();
+	}
+
+	void EditorSystem::PostUpdate()
+	{
+
 	}
 
 	void EditorSystem::UpdateMainMenuBar()
@@ -152,7 +170,6 @@ namespace GameEngine
 
 		if (ImGui::Begin("Inspector", 0, window_flags))
 		{
-
 			ImGui::End();
 		}
 	}
@@ -169,13 +186,13 @@ namespace GameEngine
 		{
 			ImGuiIO& io = ImGui::GetIO();
 
-			ImTextureID my_tex_id = io.Fonts->TexID;
+			unsigned int texId = dynamic_cast<FrameBuffer_OpenGL*>(m_SceneFrameBuffer.get())->GetColorTextureId(0);
 			ImVec2 size = ImGui::GetContentRegionMax();
 			size.x -= (ImGui::GetStyle().FramePadding.x * 2.0f + ImGui::GetStyle().FrameBorderSize * 2);
 			size.y -= (ImGui::GetFrameHeightWithSpacing() + ImGui::GetStyle().FrameBorderSize * 2);
 
 			// draw a texture of the scene
-			ImGui::Image(my_tex_id, size, ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+			ImGui::Image((ImTextureID)(intptr_t)texId, size, ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
 
 			ImGui::End();
 		}
@@ -183,7 +200,7 @@ namespace GameEngine
 
 	void EditorSystem::GameObjectAddCallback(EventArgs& args)
 	{
-		GameObjectEventArgs* gameObjArgs = static_cast<GameObjectEventArgs*>(&args);
+		/*GameObjectEventArgs* gameObjArgs = static_cast<GameObjectEventArgs*>(&args);
 		GameObjectPtr obj = gameObjArgs->gameObj.lock();
 
 		if (obj) // check it hasnt expired
@@ -194,7 +211,7 @@ namespace GameEngine
 			{
 				m_Camera = obj;
 			}
-		}
+		}*/
 	}
 
 	void EditorSystem::UpdateHierarchyTreeRecursive(GameObjectWeakPtr obj)

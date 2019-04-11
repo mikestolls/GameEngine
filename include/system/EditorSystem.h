@@ -2,6 +2,7 @@
 #include "manager/SystemManager.h"
 #include "manager/EventManager.h"
 #include "manager/GameObjectManager.h"
+#include "rendering/FrameBuffer_OpenGL.h"
 
 namespace GameEngine
 {
@@ -17,6 +18,8 @@ namespace GameEngine
 	private:
 
 		void						Update();
+		void						PreUpdate();
+		void						PostUpdate();
 
 		void						UpdateMainMenuBar();
 		void						UpdateHierarchyPanel();
@@ -27,6 +30,8 @@ namespace GameEngine
 
 		void						GameObjectAddCallback(EventArgs& args);
 
-		GameObjectPtr				m_Camera;
+		//GameObjectWeakPtr			m_Camera;
+
+		FrameBufferPtr				m_SceneFrameBuffer;
 	};
 }

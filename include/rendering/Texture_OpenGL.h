@@ -8,8 +8,6 @@ namespace GameEngine
 	{
 	public:
 											ITexture() { }
-											ITexture(unsigned int width, unsigned int height, int internalFormat, int format, int type, void* data) { }
-											ITexture(const char* filename) { }
 		virtual								~ITexture() { }
 
 		inline unsigned int					GetTextureId() { return m_TextureId; }
@@ -31,7 +29,7 @@ namespace GameEngine
 											Texture_OpenGL();
 											Texture_OpenGL(unsigned int width, unsigned int height, int internalFormat, int format, int type, void* data);
 											Texture_OpenGL(const char* filename);
-		virtual								~Texture_OpenGL();
+											~Texture_OpenGL();
 
 		virtual void						ReloadTexture();
 

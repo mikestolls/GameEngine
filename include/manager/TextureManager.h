@@ -20,7 +20,7 @@ namespace GameEngine
 
 	private:
 		
-		std::map<std::string, TexturePtr>		m_TextureMap;
+		std::map<std::string, TexturePtr>		m_TextureMap; // note: we don't delete textures yet
 	};
 
 	typedef std::shared_ptr<TextureManager>		TextureManagerPtr;
