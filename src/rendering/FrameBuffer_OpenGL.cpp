@@ -15,36 +15,19 @@ namespace GameEngine
 
 		m_Width = width;
 		m_Height = height;
-
+		
+		// create the color textures
 		m_ColorTexture.resize(4);
-
-		// create color texture
-		if ((type & FRAMEBUFFER_COLORTEXTURE0) != 0)
+		for (unsigned int i = 0; i < 4; i++)
 		{
-			TexturePtr texture = Engine::GetInstance()->GetTextureMgr()->CreateTexture("", width, height, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-			glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, texture->GetTextureId(), 0);
-			m_ColorTexture[0] = texture;
-		}
-
-		if ((type & FRAMEBUFFER_COLORTEXTURE1) != 0)
-		{
-			TexturePtr texture = Engine::GetInstance()->GetTextureMgr()->CreateTexture("", width, height, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-			glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, texture->GetTextureId(), 0);
-			m_ColorTexture[1] = texture;
-		}
-
-		if ((type & FRAMEBUFFER_COLORTEXTURE2) != 0)
-		{
-			TexturePtr texture = Engine::GetInstance()->GetTextureMgr()->CreateTexture("", width, height, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-			glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, texture->GetTextureId(), 0);
-			m_ColorTexture[2] = texture;
-		}
-
-		if ((type & FRAMEBUFFER_COLORTEXTURE3) != 0)
-		{
-			TexturePtr texture = Engine::GetInstance()->GetTextureMgr()->CreateTexture("", width, height, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-			glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, texture->GetTextureId(), 0);
-			m_ColorTexture[3] = texture;
+			if ((type & (FRAMEBUFFER_COLORTEXTURE0 << i)) != 0)
+			{
+				std::stringstream hashstream;
+				hashstream << "framebuffer_" << m_FrameBufferId << "_" << "_color_" << i;
+				TexturePtr texture = Engine::GetInstance()->GetTextureMgr()->CreateTexture(hashstream.str().c_str(), width, height, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+				glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, texture->GetTextureId(), 0);
+				m_ColorTexture[i] = texture;
+			}
 		}
 
 		// create depth buffer
@@ -59,7 +42,9 @@ namespace GameEngine
 		// create depth texture
 		if ((type & FRAMEBUFFER_DEPTHTEXTURE) != 0)
 		{
-			m_DepthTexture = Engine::GetInstance()->GetTextureMgr()->CreateTexture("", width, height, GL_DEPTH_COMPONENT32, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+			std::stringstream hashstream;
+			hashstream << "framebuffer_" << m_FrameBufferId << "_" << "_depth";
+			m_DepthTexture = Engine::GetInstance()->GetTextureMgr()->CreateTexture(hashstream.str().c_str(), width, height, GL_DEPTH_COMPONENT32, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
 			glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, m_DepthTexture->GetTextureId(), 0);
 		}
 

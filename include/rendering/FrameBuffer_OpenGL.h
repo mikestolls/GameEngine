@@ -37,6 +37,12 @@ namespace GameEngine
 		void								Push();
 		void								Pop();
 
+		inline unsigned int					GetFrameBufferId() { return m_FrameBufferId; }
+
+		inline unsigned int					GetColorTextureId(unsigned int index) { return ((m_ColorTexture.size() < index || m_ColorTexture[index] == NULL) ? NULL : m_ColorTexture[index]->GetTextureId()); }
+		inline unsigned int					GetDepthBufferId() { return m_DepthRenderBufferId; }
+		inline unsigned int					GetDepthTextureId() { return (m_DepthTexture ? m_DepthTexture->GetTextureId() : 0); }
+
 	private:
 
 		unsigned int						m_FrameBufferId;
