@@ -2,11 +2,12 @@
 #include "manager/SystemManager.h"
 #include "manager/EventManager.h"
 #include "manager/GameObjectManager.h"
+#include "system/RenderSystem.h"
 #include "rendering/FrameBuffer_OpenGL.h"
 
 namespace GameEngine
 {
-	class EditorSystem : public ISystem
+	class EditorSystem : public RenderSystem
 	{
 	public:
 									EditorSystem();
@@ -17,9 +18,7 @@ namespace GameEngine
 
 	private:
 
-		void						Update();
-		void						PreUpdate();
-		void						PostUpdate();
+		void						Update(EventArgs& args);
 
 		void						UpdateMainMenuBar();
 		void						UpdateHierarchyPanel();
@@ -27,10 +26,6 @@ namespace GameEngine
 		void						UpdateScenePanel();
 
 		void						UpdateHierarchyTreeRecursive(GameObjectWeakPtr obj);
-
-		void						GameObjectAddCallback(EventArgs& args);
-
-		//GameObjectWeakPtr			m_Camera;
 
 		FrameBufferPtr				m_SceneFrameBuffer;
 	};
