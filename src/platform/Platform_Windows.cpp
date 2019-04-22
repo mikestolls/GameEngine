@@ -15,6 +15,7 @@ namespace GameEngine
 	void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mod);
 	void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 	void MouseCallback(GLFWwindow* window, int button, int action, int mods);
+	void WindowSizeCallback(GLFWwindow* window, int width, int height);
 
 	bool mousePressed[3] = { false, false, false };
 	double mouseX, mouseY;
@@ -67,6 +68,7 @@ namespace GameEngine
 		glfwSetKeyCallback(window, KeyCallback);
 		glfwSetMouseButtonCallback(window, MouseCallback);
 		glfwSetScrollCallback(window, ScrollCallback);
+		glfwSetWindowSizeCallback(window, WindowSizeCallback);
 
 		// Options
 		glfwSetInputMode(window, GLFW_CURSOR, GL_TRUE);
@@ -77,10 +79,10 @@ namespace GameEngine
 		m_Driver = std::make_shared<Driver_OpenGL>();
 		m_Driver->Initialize();
 		m_Driver->SetViewport(glm::vec2(0.0f, 0.0f), glm::vec2(m_ScreenWidth, m_ScreenHeight));
-
-
+		
 		m_ImguiDriver = std::make_shared<GameEngine::UI::ImguiDriver>();
 		m_ImguiDriver->Initialize((void*)glfwGetWin32Window(window), m_ScreenWidth, m_ScreenHeight, m_Driver);
+		m_ImguiDriver->SetViewport(glm::vec2(0.0f, 0.0f), glm::vec2(m_ScreenWidth, m_ScreenHeight));
 
 		return 0;
 	}
@@ -101,7 +103,7 @@ namespace GameEngine
 		Initialize();
 
 		Engine* engine = Engine::GetInstance();
-		engine->Initialize(m_Driver);
+		engine->Initialize(m_Driver, m_ImguiDriver);
 
 		// init test scene
 		GameObjectPtr obj = std::make_shared<GameObject>();
@@ -223,6 +225,12 @@ namespace GameEngine
 			mousePressed[1] = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE);
 			mousePressed[2] = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
 		}
+	}
+
+	void WindowSizeCallback(GLFWwindow* window, int width, int height)
+	{
+		Engine::GetInstance()->GetDriver()->SetViewport(glm::vec2(0.0f, 0.0f), glm::vec2(width, height));
+		Engine::GetInstance()->GetImguiDriver()->SetViewport(glm::vec2(0.0f, 0.0f), glm::vec2(width, height));
 	}
 }
 

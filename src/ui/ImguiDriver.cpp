@@ -113,10 +113,13 @@ namespace GameEngine
 			FrameEventArgs* frameEventArgs = static_cast<FrameEventArgs*>(&args);
 
 			ImGuiIO& io = ImGui::GetIO();
-
 			io.DeltaTime = frameEventArgs->deltaTime;
-			
+			io.DisplaySize = ImVec2((float)m_ViewportRect.b.x, (float)m_ViewportRect.b.y);
+
 			ImGui::NewFrame();
+			
+			ImGui::SetNextWindowPos(ImVec2((float)m_ViewportRect.a.x, (float)m_ViewportRect.a.y));
+			ImGui::SetNextWindowSize(ImVec2((float)m_ViewportRect.b.x, (float)m_ViewportRect.b.y));
 		}
 
 		void ImguiDriver::PostUpdate(EventArgs& args)

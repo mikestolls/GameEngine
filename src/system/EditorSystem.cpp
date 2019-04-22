@@ -87,12 +87,7 @@ namespace GameEngine
 		windowFlags |= ImGuiWindowFlags_NoResize;
 		windowFlags |= ImGuiWindowFlags_NoCollapse;
 		windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
-
-		ImGuiViewport* viewport = ImGui::GetMainViewport();
-		ImGui::SetNextWindowPos(viewport->Pos);
-		ImGui::SetNextWindowSize(viewport->Size);
-		ImGui::SetNextWindowViewport(viewport->ID);
-
+		
 		if (ImGui::Begin("Main", 0, windowFlags))
 		{
 			// docking configs
@@ -106,9 +101,9 @@ namespace GameEngine
 			UpdateHierarchyPanel();
 			UpdateInspectorPanel();
 			UpdateScenePanel();
-
-			ImGui::End();
 		}
+
+		ImGui::End();
 	}
 
 	void EditorSystem::UpdateMainMenuBar()
@@ -190,7 +185,7 @@ namespace GameEngine
 			size.y -= (ImGui::GetFrameHeightWithSpacing() + ImGui::GetStyle().FrameBorderSize * 2);
 
 			// draw a texture of the scene
-			ImGui::Image((ImTextureID)(intptr_t)texId, size, ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+			ImGui::Image((ImTextureID)(intptr_t)texId, size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
 		}
 
 		ImGui::End();

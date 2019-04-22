@@ -19,10 +19,11 @@ namespace GameEngine
 
 		static Engine*					GetInstance();
 
-		int								Initialize(DriverPtr driver);
+		int								Initialize(DriverPtr driver, UI::ImguiDriverPtr imguiDriver);
 		int								Destroy();
 
 		inline DriverPtr				GetDriver() { return m_Driver; }
+		inline UI::ImguiDriverPtr		GetImguiDriver() { return m_ImguiDriver; }
 		inline ShaderManagerPtr			GetShaderMgr() { return m_ShaderMgr; }
 		inline MaterialManagerPtr		GetMaterialMgr() { return m_MaterialMgr; }
 		inline TextureManagerPtr		GetTextureMgr() { return m_TextureMgr; }
@@ -41,6 +42,7 @@ namespace GameEngine
 		bool							m_RequestDestroy;
 
 		DriverPtr						m_Driver;
+		UI::ImguiDriverPtr				m_ImguiDriver;
 		SystemManagerPtr				m_SystemMgr;
 		ShaderManagerPtr				m_ShaderMgr;
 		MaterialManagerPtr				m_MaterialMgr;

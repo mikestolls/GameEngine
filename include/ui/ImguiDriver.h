@@ -21,6 +21,9 @@ namespace GameEngine
 			int									Initialize(void* handle, int screenWidth, int screenHeight, DriverPtr driver);
 			int									Destroy();
 
+			inline void							SetViewport(Math::Recti viewport) { m_ViewportRect = viewport; }
+			inline void							SetViewport(glm::vec2 a, glm::vec2 b) { m_ViewportRect.a = a; m_ViewportRect.b = b; }
+
 			void								UpdateMouseState(bool leftDown, bool middleDown, bool rightDown, int posX, int posY);
 
 		private:
@@ -31,6 +34,8 @@ namespace GameEngine
 			DriverPtr							m_Driver;
 			MaterialPtr							m_Material;
 			TexturePtr							m_FontTexture;
+
+			Math::Recti							m_ViewportRect;
 
 			unsigned int						m_VertexArrayId;
 			unsigned int						m_VertexBuffer;
