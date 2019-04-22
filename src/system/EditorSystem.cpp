@@ -25,12 +25,14 @@ namespace GameEngine
 
 	int EditorSystem::Initialize()
 	{
-		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("System_Update", std::bind(&EditorSystem::Update, this));
-		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PreUpdate", std::bind(&EditorSystem::PreUpdate, this));
-		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("Frame_PostUpdate", std::bind(&EditorSystem::PostUpdate, this));
+		Engine* engine = Engine::GetInstance();
 
-		Engine::GetInstance()->GetEventMgr()->RegisterEventListener("GameObject_Add", std::bind(&EditorSystem::GameObjectAddCallback, this, std::placeholders::_1));
+		engine->GetDriver()->SetClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
+		engine->GetEventMgr()->RegisterEventListener("System_Update", std::bind(&EditorSystem::Update, this, std::placeholders::_1));
+		engine->GetEventMgr()->RegisterEventListener("GameObject_Add", std::bind(&EditorSystem::GameObjectAddCallback, this, std::placeholders::_1));
+		engine->GetEventMgr()->RegisterEventListener("GameObject_Remove", std::bind(&EditorSystem::GameObjectRemoveCallback, this, std::placeholders::_1));
+		
 		m_SceneFrameBuffer = std::make_shared<FrameBuffer_OpenGL>(1024, 1024, IFrameBuffer::FRAMEBUFFER_COLORTEXTURE0 | IFrameBuffer::FRAMEBUFFER_DEPTHBUFFER);
 
 		return 0;
@@ -43,8 +45,13 @@ namespace GameEngine
 		return 0;
 	}
 
-	void EditorSystem::Update()
+	void EditorSystem::Update(EventArgs& args)
 	{
+		// do the render system update on the frame buffer
+		m_SceneFrameBuffer->Push();
+
+		RenderSystem::Update(args);
+
 		// pop frame buffer
 		m_SceneFrameBuffer->Pop();
 
@@ -80,19 +87,12 @@ namespace GameEngine
 		windowFlags |= ImGuiWindowFlags_NoResize;
 		windowFlags |= ImGuiWindowFlags_NoCollapse;
 		windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
-
-		ImVec2 main_viewport_pos = ImGui::GetMainViewport()->Pos;
-		ImVec2 main_viewport_size = ImGui::GetMainViewport()->Size;
-		//ImGui::SetNextWindowPos(ImVec2(main_viewport_pos.x, main_viewport_pos.y));
-		//ImGui::SetNextWindowSize(ImVec2(main_viewport_size.x, main_viewport_size.y));
-
+		
 		if (ImGui::Begin("Main", 0, windowFlags))
 		{
 			// docking configs
-			static ImGuiDockNodeFlags dockspaceFlags = 0;
-
 			ImGuiID dockspaceId = ImGui::GetID("DockSpace");
-			ImGui::DockSpace(dockspaceId, ImVec2(0.0f, 0.0f), dockspaceFlags);
+			ImGui::DockSpace(dockspaceId, ImVec2(0.0f, 0.0f));
 
 			// setup the main imgui window
 			UpdateMainMenuBar();
@@ -101,18 +101,9 @@ namespace GameEngine
 			UpdateHierarchyPanel();
 			UpdateInspectorPanel();
 			UpdateScenePanel();
-
-			ImGui::End();
 		}
-	}
-	void EditorSystem::PreUpdate()
-	{
-		m_SceneFrameBuffer->Push();
-	}
 
-	void EditorSystem::PostUpdate()
-	{
-
+		ImGui::End();
 	}
 
 	void EditorSystem::UpdateMainMenuBar()
@@ -157,9 +148,9 @@ namespace GameEngine
 			{
 				UpdateHierarchyTreeRecursive(child);
 			}
-
-			ImGui::End();
 		}
+
+		ImGui::End();
 	}
 
 	void EditorSystem::UpdateInspectorPanel()
@@ -170,8 +161,10 @@ namespace GameEngine
 
 		if (ImGui::Begin("Inspector", 0, window_flags))
 		{
-			ImGui::End();
+
 		}
+
+		ImGui::End();
 	}
 
 
@@ -192,26 +185,10 @@ namespace GameEngine
 			size.y -= (ImGui::GetFrameHeightWithSpacing() + ImGui::GetStyle().FrameBorderSize * 2);
 
 			// draw a texture of the scene
-			ImGui::Image((ImTextureID)(intptr_t)texId, size, ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
-
-			ImGui::End();
+			ImGui::Image((ImTextureID)(intptr_t)texId, size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
 		}
-	}
 
-	void EditorSystem::GameObjectAddCallback(EventArgs& args)
-	{
-		/*GameObjectEventArgs* gameObjArgs = static_cast<GameObjectEventArgs*>(&args);
-		GameObjectPtr obj = gameObjArgs->gameObj.lock();
-
-		if (obj) // check it hasnt expired
-		{
-			CameraComponent* cam = obj->GetComponent<CameraComponent>();
-
-			if (cam)
-			{
-				m_Camera = obj;
-			}
-		}*/
+		ImGui::End();
 	}
 
 	void EditorSystem::UpdateHierarchyTreeRecursive(GameObjectWeakPtr obj)

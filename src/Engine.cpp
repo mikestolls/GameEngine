@@ -44,9 +44,10 @@ namespace GameEngine
 		m_EventMgr = nullptr;
 	}
 
-	int Engine::Initialize(DriverPtr driver)
+	int Engine::Initialize(DriverPtr driver, UI::ImguiDriverPtr imguiDriver)
 	{
 		m_Driver = driver;
+		m_ImguiDriver = imguiDriver;
 
 		// initialize manager
 		m_SystemMgr->Initialize();

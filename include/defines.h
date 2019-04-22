@@ -33,6 +33,12 @@ namespace GameEngine
 		template <typename T>
 		struct Rect
 		{
+			Rect()
+			{
+				a = glm::tvec2<T>();
+				b = glm::tvec2<T>();
+			}
+
 			glm::tvec2<T> a;
 			glm::tvec2<T> b;
 		};

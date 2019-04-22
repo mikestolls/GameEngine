@@ -9,14 +9,14 @@ namespace GameEngine
 	{
 	public:
 											RenderSystem();
-											~RenderSystem();
+		virtual 							~RenderSystem();
 																	   
-		int									Initialize();
-		int									Destroy();
+		virtual int							Initialize();
+		virtual int							Destroy();
 
-	private:
+	protected:
 
-		void								Update(EventArgs& args);
+		virtual void						Update(EventArgs& args);
 
 		void								AddGameObject(GameObjectWeakPtr gameObj);
 
